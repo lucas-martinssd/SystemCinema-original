@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Lucas
  */
-public class Proprietario extends Pessoa{
+public class Proprietario extends Funcionario{
     
     
     //Arrumar herança entre Funcionario e Proprietario, colocar Proprietario como composição de Gestão de Clientes tambem
@@ -21,7 +21,8 @@ public class Proprietario extends Pessoa{
     private String senhaProprietario;
     private String senhaProprietarioOriginal;
     private String loginProprietarioOriginal;
-
+    private Estoque estoque;
+      
     public Proprietario(){};
     
     public Proprietario(String loginProprietario, String senhaProprietario, String senhaProprietarioOriginal, String loginProprietarioOriginal, String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
@@ -92,33 +93,37 @@ public class Proprietario extends Pessoa{
     }
     
     //Completar
-    public void compraDeEstoque(){
-        //System.out.println("Qual produto você deseja comprar, pipoca, bebida ou guloseimas? ");
-        //String produtoComprado = sc.nextLine();
+    public void compraDeEstoque(Estoque estoque){
+        System.out.println("Qual produto você deseja comprar: pipoca, bebidas ou guloseimas? ");
+        String produtoComprado = sc.nextLine();
         
-        //System.out.println("Quantos produtos você deseja comprar? ");
-        //int quantidadeComprado = sc.nextInt();
+        System.out.println("Quantos produtos você deseja comprar? ");
+        int quantidadeComprado = sc.nextInt();
+        sc.nextLine();
         
-        //Estoque estoque = new Estoque();
-        //if(produtoComprado == "pipoca"){
-        //    estoque.pipoca = pipoca + qunatidadeComprado;
-        //}
-    }
-    
-    public void relatorioAnualCaixa(){
         
-    }
-    
-    public void relatorioMensalCaixa(){
-        
-    }
-    
-    public void relatorioAnualCInema(){
-        
-    }
-    
-    public void relatorioMensalCinema(){
-        
+        if(produtoComprado.equals("pipoca")){
+            int quantidadePipoca = estoque.getQuantidadePipoca();
+            quantidadePipoca = quantidadePipoca + quantidadeComprado;
+            estoque.setQuantidadePipoca(quantidadePipoca);
+            System.out.println("Informe a validade da pipoca: ");
+            String validadePipoca = sc.nextLine();
+            estoque.cadastrarProduto("Pipoca", validadePipoca);
+        }
+        else if(produtoComprado.equals("bebidas")){
+            int quantidadeBebidas = estoque.getQuantidadeBebidas();
+            quantidadeBebidas = quantidadeBebidas + quantidadeComprado;
+            estoque.setQuantidadeBebidas(quantidadeBebidas);
+            String validadeBebidas = sc.nextLine();
+            estoque.cadastrarProduto("Pipoca", validadeBebidas);
+        }
+        else if(produtoComprado.equals("guloseimas")){
+            int quantidadeGuloseimas = estoque.getQuantidadeGuloseimas();
+            quantidadeGuloseimas = quantidadeGuloseimas + quantidadeComprado;
+            estoque.setQuantidadeGuloseimas(quantidadeGuloseimas);
+            String validadeGuloseimas = sc.nextLine();
+            estoque.cadastrarProduto("Pipoca", validadeGuloseimas);
+        }
     }
 
     public String getLoginProprietario() {

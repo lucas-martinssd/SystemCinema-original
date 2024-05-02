@@ -32,6 +32,10 @@ public class Funcionario extends Pessoa {
         this.senhaFuncionarioOriginal = senhaFuncionarioOriginal;
         this.loginFuncionarioOriginal = loginFuncionarioOriginal; 
     }
+
+    public Funcionario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
+        super(name, sobrenome, endereco, telefone, cpf, aniversario);
+    }
     
     public void funcionarioRealizarLogin(){
         boolean loginValido = false;

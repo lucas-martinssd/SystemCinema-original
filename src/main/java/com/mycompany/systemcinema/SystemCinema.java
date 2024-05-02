@@ -13,13 +13,11 @@ import java.time.Duration;
 public class SystemCinema {
     
     public static void main(String[] args) {
-              
-        Cliente cliente = new Cliente();
-        cliente.setName("Lucas");
+        Proprietario proprietario = new Proprietario();
+        Estoque estoque = new Estoque();
+        estoque.setQuantidadePipoca(1);
         
-        GestaoDeClientes gestao = new GestaoDeClientes();
-        gestao.cadastroDeCliente(cliente);
-        gestao.editarCadastroCliente(cliente);
+        proprietario.compraDeEstoque(estoque);
     }
 
     

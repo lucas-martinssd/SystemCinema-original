@@ -39,7 +39,7 @@ public class Produto {
     {
         this.validade = validade;
     }
-    
+     
     /**
      * Constrói um novo produto sem informação.
      *

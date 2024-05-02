@@ -6,6 +6,7 @@ package com.mycompany.systemcinema;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 /**
  * Classe para armazenar e detalhar o Estoque.
  * <p>
@@ -22,6 +23,10 @@ public class Estoque
      */
     private List<Produto> produto;
     
+    private int quantidadePipoca;
+    private int quantidadeBebidas;
+    private int quantidadeGuloseimas;
+    
     /**
      * Contrutor que Estoque recebe um ArrayList.
      */
@@ -30,6 +35,13 @@ public class Estoque
         this.produto = new ArrayList<>();
     }
 
+    public Estoque(int quantidadePipoca, int quantidadeBebidas, int quantidadeGuloseimas) {
+        this.quantidadePipoca = quantidadePipoca;
+        this.quantidadeBebidas = quantidadeBebidas;
+        this.quantidadeGuloseimas = quantidadeGuloseimas;
+    }
+    
+
     /**
      * Realiza o cadastro de um novo produto, em que LocalDate.Parse converte a a String ValidadeSTr que será pedida ao funcionário e converterá para o formato LocalDate.
      * @param nome nome do produto.
@@ -37,7 +49,8 @@ public class Estoque
      */
     public void cadastrarProduto(String nome, String validadeStr)
     {   
-        LocalDate validade = LocalDate.parse(validadeStr);
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate validade = LocalDate.parse(validadeStr, formatoData);
         this.produto.add(new Produto(nome, validade));
     }
     /**
@@ -60,4 +73,30 @@ public class Estoque
             System.out.print(produto);
         }
     }
+
+    public int getQuantidadePipoca() {
+        return quantidadePipoca;
+    }
+
+    public int getQuantidadeBebidas() {
+        return quantidadeBebidas;
+    }
+
+    public int getQuantidadeGuloseimas() {
+        return quantidadeGuloseimas;
+    }
+
+    public void setQuantidadePipoca(int quantidadePipoca) {
+        this.quantidadePipoca = quantidadePipoca;
+    }
+
+    public void setQuantidadeBebidas(int quantidadeBebidas) {
+        this.quantidadeBebidas = quantidadeBebidas;
+    }
+
+    public void setQuantidadeGuloseimas(int quantidadeGuloseimas) {
+        this.quantidadeGuloseimas = quantidadeGuloseimas;
+    }
+    
+    
 }
