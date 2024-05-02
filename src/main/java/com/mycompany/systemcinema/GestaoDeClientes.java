@@ -15,36 +15,35 @@ import java.util.Scanner;
 public class GestaoDeClientes {
     
     private Cliente cliente;
-    private Pessoa pessoa;
     
     Scanner sc = new Scanner(System.in);
     
-    public void cadastroDeCliente() {
+    public void cadastroDeCliente(Cliente cliente) {
         System.out.println("Qual o nome do cliente: ");
         String name = sc.nextLine();
-        pessoa.setName(name);
+        cliente.setName(name);
         
         System.out.println("Qual o sobrenome do cliente: ");
         String sobrenome = sc.nextLine();
-        pessoa.setSobrenome(sobrenome);
+        cliente.setSobrenome(sobrenome);
         
         System.out.println("Qual o endereço do cliente: ");
         String endereco = sc.nextLine();
-        pessoa.setEndereco(endereco);
+        cliente.setEndereco(endereco);
         
         System.out.println("Qual o telefone do cliente: ");
         String telefone = sc.nextLine();
-        pessoa.setTelefone(telefone);
+        cliente.setTelefone(telefone);
         
         System.out.println("Qual o cpf do cliente: ");
         String cpf = sc.nextLine();
-        pessoa.setCpf(cpf);
+        cliente.setCpf(cpf);
         
         System.out.println("Qual a data de nascimento do cliente: ");
-        String aniversarioTexto = sc.next();
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String aniversarioTexto = sc.nextLine();
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
-        pessoa.setAniversario(aniversario);
+        cliente.setAniversario(aniversario);
         
         System.out.println("Qual vai ser o login do cliente: ");
         String loginClienteOriginal = sc.nextLine();
@@ -53,42 +52,42 @@ public class GestaoDeClientes {
         String senhaClienteOriginal = sc.nextLine();
     }
     
-    public void editarCadastroCliente() {
+    public void editarCadastroCliente(Cliente cliente) {
         System.out.println("Qual informação vai ser alterada: name, sobrenome, endereco, telefone, cpf, "
                 + "senha ou login?");
         String alterada = sc.nextLine();
         
-        if (alterada == pessoa.getName()){
+        if (alterada.equals("name")){
             System.out.println("Qual é o novo nome? ");
             String novoNome = sc.nextLine();
-            pessoa.setName(novoNome);
+            cliente.setName(novoNome);
         }
-        else if (alterada == pessoa.getSobrenome()) {
+        else if (alterada.equals("sobrenome")) {
             System.out.println("Qual é o novo sobrenome? ");
             String novoSobrenome = sc.nextLine();
-            pessoa.setSobrenome(novoSobrenome);
+            cliente.setSobrenome(novoSobrenome);
         }
-        else if (alterada == pessoa.getEndereco()) {
+        else if (alterada.equals("endereco")) {
             System.out.println("Qual é o novo endereco? ");
             String novoEndereco = sc.nextLine();
-            pessoa.setEndereco(novoEndereco);
+            cliente.setEndereco(novoEndereco);
         }
-        else if (alterada == pessoa.getTelefone()) {
+        else if (alterada.equals("telefone")) {
             System.out.println("Qual é o novo telefone? ");
             String novoTelefone = sc.nextLine();
-            pessoa.setTelefone(novoTelefone);
+            cliente.setTelefone(novoTelefone);
         }
-        else if (alterada == pessoa.getCpf()) {
+        else if (alterada.equals("cpf")) {
             System.out.println("Qual é o novo cpf? ");
             String novoCpf = sc.nextLine();
-            pessoa.setCpf(novoCpf);
+            cliente.setCpf(novoCpf);
         }
-        else if (alterada == cliente.getSenhaClienteOriginal()) {
+        else if (alterada.equals("senha")) {
             System.out.println("Qual é a nova senha? ");
             String novaSenha = sc.nextLine();
             cliente.setSenhaClienteOriginal(novaSenha);
         }
-        else if (alterada == cliente.getLoginClienteOriginal()) {
+        else if (alterada.equals("login")) {
             System.out.println("Qual é o novo login? ");
             String novoLogin = sc.nextLine();
             cliente.setLoginClienteOriginal(novoLogin);

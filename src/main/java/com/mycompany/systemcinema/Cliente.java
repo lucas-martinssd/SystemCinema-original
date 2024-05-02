@@ -40,24 +40,21 @@ public class Cliente extends Pessoa{
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
     }
     
-    
-    
-    public String clienteEntrarNoSistema(){
-        String bemVindo = "Bem vindo ao CineDjamas";
-        return bemVindo;
-    }
-    
     public void clienteRealizarLogin(){
-        System.out.println("Informe o seu login: ");
-        loginCliente = sc.nextLine();
-        System.out.println("Informe a sua senha: ");
-        senhaCliente = sc.nextLine();
+        boolean loginValido = false;
+        while (!loginValido){
+            System.out.println("Informe o seu login: ");
+            loginCliente = sc.nextLine();
+            System.out.println("Informe a sua senha: ");
+            senhaCliente = sc.nextLine();
         
-        if(loginCliente==loginClienteOriginal && senhaCliente==senhaClienteOriginal){
-            clienteEntrarNoSistema();
-        }
-        else {
-            clienteRealizarLogin();
+            if(loginCliente.equals(loginClienteOriginal) && senhaCliente.equals(senhaClienteOriginal)){
+                loginValido = true;
+                System.out.println("Bem vindo ao CineDjamas");
+            }
+            else {
+                System.out.println("Login ou senha incorretos. Tente novamente");
+            }
         }
     }
     
@@ -83,8 +80,8 @@ public class Cliente extends Pessoa{
         setCpf(cpf);
         
         System.out.println("Qual a sua data de nascimento: ");
-        String aniversarioTexto = sc.next();
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String aniversarioTexto = sc.nextLine();
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
         setAniversario(aniversario);
         

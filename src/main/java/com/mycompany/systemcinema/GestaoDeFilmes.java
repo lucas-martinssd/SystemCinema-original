@@ -5,27 +5,55 @@
 package com.mycompany.systemcinema;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Duration;
 /**
+ * Classe para fazer a gestao de filmes.
+ * <p>
+ * Esta classe é usada para gerir os filmes, tanto o filme em específico, como cadastrar um novo filme e remover um filme.
+ * </p>
  *
  * @author enzov
+ * @version 1.0
  */
 public class GestaoDeFilmes 
-{
-    private List<Filme> filmes;
-
+{   /**
+     * Lista para criar diversos filmes.
+     */
+    private List<Filme> filmes = new ArrayList<>();
+    /**
+     * Contrutor que filmes recebe um ArrayList.
+     * @param filmes direciona a todos os atributos da classe Filme
+     */
     public GestaoDeFilmes(List<Filme> filmes) 
     {
         this.filmes = new ArrayList<>();
     }
-    // Adiciona um filme na lista de filmes
-    public void cadastraFilme(String nome, String genero)
+    public GestaoDeFilmes(){}
+    /**
+     * Cadastra um filme na lista de filmes.
+     * @param nome nome do filme.
+     * @param genero genero do filme.
+     * @param duracao duracao do filme.
+     */
+    public void cadastraFilme(String nome, String genero, Duration duracao)
     {
-        filmes.add(new Filme(nome,genero));
+        this.filmes.add(new Filme(nome,genero,duracao));
     }
-    // Remove um filme da lista atravês de uma expressao lambda, em que caso X.getNome(chama o método getNome da clase Filme)e que em seguida compara o nome do filme X com o parâmetro nome. retorna True se forem iguais, removendo o filme da lista 
+    
+    
+     
+    /**
+     * Remove um filme da lista atravês de uma expressao lambda, em que caso X.getNome(chama o método getNome da clase Filme)e que em seguida compara o nome do filme X com o parâmetro nome. retorna True se forem iguais, removendo o filme da lista
+     * @param nome nome do filme.
+     * @return O filme removido.
+     */
     public boolean removeFilme(String nome)
     {
-        return filmes.removeIf(x -> x.getNome().equals(nome));
+        return filmes.removeIf(x -> x.getTitulo().equals(nome));
     }
+    
+    public List<Filme> getFilmes(){
+    return filmes;
+}
     
 }

@@ -40,16 +40,20 @@ public class Proprietario extends Pessoa{
     }
     
     public void proprietarioRealizarLogin(){
-        System.out.println("Informe o seu login: ");
-        loginProprietario = sc.nextLine();
-        System.out.println("Informe a sua senha: ");
-        senhaProprietario = sc.nextLine();
-        
-        if(loginProprietario==loginProprietarioOriginal && senhaProprietario==senhaProprietarioOriginal){
-            proprietarioEntrarNoSistema();
-        }
-        else {
-            proprietarioRealizarLogin();
+        boolean loginValido = false;
+        while (!loginValido) {
+            System.out.println("Informe o seu login: ");
+            loginProprietario = sc.nextLine();
+            System.out.println("Informe a sua senha: ");
+            senhaProprietario = sc.nextLine();
+
+            if(loginProprietario.equals(loginProprietarioOriginal) && senhaProprietario.equals(senhaProprietarioOriginal)){
+                loginValido = true;
+                System.out.println("Bem vindo ao CineDjamas proprietario");
+            }
+            else {
+                System.out.println("Login ou senha incorretos. Tente novamente");
+            }    
         }
     }
     
@@ -76,7 +80,7 @@ public class Proprietario extends Pessoa{
         
         System.out.println("Qual a sua data de nascimento: ");
         String aniversarioTexto = sc.next();
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
         setAniversario(aniversario);
         

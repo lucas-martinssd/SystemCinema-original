@@ -18,8 +18,8 @@ public class Funcionario extends Pessoa {
     //Arrumar herança, colocar para funcionario direto de pessoa, colocar realizarLogin, 
     private String loginFuncionario;
     private String senhaFuncionario;
-    private String senhaFuncionarioOriginal;
-    private String loginFuncionarioOriginal;
+    private String senhaFuncionarioOriginal = "senha";
+    private String loginFuncionarioOriginal = "Lucas";
 
     Scanner sc = new Scanner(System.in);
     
@@ -32,23 +32,23 @@ public class Funcionario extends Pessoa {
         this.senhaFuncionarioOriginal = senhaFuncionarioOriginal;
         this.loginFuncionarioOriginal = loginFuncionarioOriginal; 
     }
-
-    public String funcionarioEntrarNoSistema(){
-        String bemVindo = "Bem vindo ao Funcionario";
-        return bemVindo;
-    }
     
     public void funcionarioRealizarLogin(){
-        System.out.println("Informe o seu login: ");
-        loginFuncionario = sc.nextLine();
-        System.out.println("Informe a sua senha: ");
-        senhaFuncionario = sc.nextLine();
+        boolean loginValido = false;
         
-        if(loginFuncionario==loginFuncionarioOriginal && senhaFuncionario==senhaFuncionarioOriginal){
-            funcionarioEntrarNoSistema();
-        }
-        else {
-            funcionarioRealizarLogin();
+        while (!loginValido) {
+            System.out.println("Informe o seu login: ");
+            loginFuncionario = sc.nextLine();
+            System.out.println("Informe a sua senha: ");
+            senhaFuncionario = sc.nextLine();
+
+            if(loginFuncionario.equals(loginFuncionarioOriginal) && senhaFuncionario.equals(senhaFuncionarioOriginal)){
+                loginValido = true;
+                System.out.println("Bem vindo ao CineDjamas funcionario");
+            }
+            else {
+                System.out.println("Login ou senha incorretos. Tente novamente");
+            }
         }
     }
     
@@ -75,7 +75,7 @@ public class Funcionario extends Pessoa {
         
         System.out.println("Qual a sua data de nascimento: ");
         String aniversarioTexto = sc.next();
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
         setAniversario(aniversario);
         

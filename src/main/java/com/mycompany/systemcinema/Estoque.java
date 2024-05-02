@@ -3,18 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.systemcinema;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import com.mycompany.systemcinema.Produto;
-
 /**
+ * Classe para armazenar e detalhar o Estoque.
+ * <p>
+ * Esta classe é usada para armazenar características de um Produto, cadastrar e remover um produto, além de listar os produtos.
+ * </p>
  *
- * @author Lucas
+ * @author enzov
+ * @version 1.0
  */
-public class Estoque {
-    
+public class Estoque 
+{
     /**
      * Lista para criar diversos produtos.
      */
@@ -33,10 +35,10 @@ public class Estoque {
      * @param nome nome do produto.
      * @param validadeStr validade do produto.
      */
-    public void cadastrarProduto(String nome, LocalDate validadeStr)
+    public void cadastrarProduto(String nome, String validadeStr)
     {   
-        //LocalDate validade = LocalDate.parse(validadeStr);
-        this.produto.add(new Produto(nome, validadeStr));
+        LocalDate validade = LocalDate.parse(validadeStr);
+        this.produto.add(new Produto(nome, validade));
     }
     /**
      * Remove um produto da lista atravês de uma expressao lambda, em que caso X.getNome(chama o método getNome da clase Produto)e que em seguida compara o nome do produto X com o parâmetro nome. retorna True se forem iguais, removendo o produto da lista
@@ -58,5 +60,4 @@ public class Estoque {
             System.out.print(produto);
         }
     }
-    
 }
