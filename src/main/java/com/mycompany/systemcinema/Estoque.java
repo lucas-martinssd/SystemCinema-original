@@ -23,6 +23,10 @@ public class Estoque
      */
     private List<Produto> produto;
     
+    public List<Produto> getProduto(){
+        return produto;
+    }
+    
     private int quantidadePipoca;
     private int quantidadeBebidas;
     private int quantidadeGuloseimas;
@@ -70,7 +74,7 @@ public class Estoque
     {
         for(Produto list : produto)
         {
-            System.out.print(produto);
+            System.out.print("\nProduto: " + list.getNome());
         }
     }
 

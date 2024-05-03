@@ -4,6 +4,8 @@
  */
 package com.mycompany.systemcinema;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Lucas
@@ -17,13 +19,31 @@ public class Caixa {
     private static double guloseimas = 5;
     private Carrinho carrinho;
     
-    public double informaValorIngressos(double valorIngressos){
-       valorIngressos = carrinho.addQuantidadeIngressos() * 10;
-       return valorIngressos;
+    Scanner sc = new Scanner(System.in);
+    
+    public double informaValorProdutos(Carrinho carrinho){
+       double valorProdutos = carrinho.selecionarQuantProduto() * 5;
+       System.out.println("O valor dos produtos escolhos é: R$ " + valorProdutos);
+       return valorProdutos;
     }
-    /*
-    public double informaValorProdutos(double valorProdutos) {
-        
+    
+    public double informaValorIngressos(Carrinho carrinho){
+        double valorIngressos = carrinho.selecionarQuantidadeIngresssos() * 10;
+        System.out.println("O valor dos ingressos desejados é: R$ " + valorIngressos);
+        return valorIngressos;
     }
-*/
+    
+    public String cancelaPagamento(){
+        String cancelamento = "Pagamento cancelado";
+        System.out.println(cancelamento);
+        return cancelamento;
+    }
+    
+    public double realizaPagamento(Carrinho carrinho){
+        System.out.println("Qual é a forma de pagamento escolhida? ");
+        String formaDePagamento = sc.nextLine();
+        double valorDaCompra = informaValorIngressos(carrinho) + informaValorProdutos(carrinho);
+        System.out.println("O valor da compra é: R$ " + valorDaCompra);
+        return valorDaCompra;
+    }
 }

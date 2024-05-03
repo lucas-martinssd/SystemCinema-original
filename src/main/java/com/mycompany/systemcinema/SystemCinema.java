@@ -13,12 +13,13 @@ import java.time.Duration;
 public class SystemCinema {
     
     public static void main(String[] args) {
-        Proprietario proprietario = new Proprietario();
-        Estoque estoque = new Estoque();
-        estoque.setQuantidadePipoca(1);
+        Carrinho carrinho = new Carrinho();
+        Caixa caixa = new Caixa();
         
-        proprietario.compraDeEstoque(estoque);
+        carrinho.selecionarQuantProduto();
+        carrinho.selecionarQuantidadeIngresssos();
+        caixa.informaValorIngressos(carrinho);
+        caixa.informaValorProdutos(carrinho);
+        caixa.realizaPagamento(carrinho);
     }
-
-    
 }

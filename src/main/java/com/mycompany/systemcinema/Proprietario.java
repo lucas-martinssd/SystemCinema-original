@@ -92,7 +92,41 @@ public class Proprietario extends Funcionario{
         String senhaProprietarioOriginal = sc.nextLine();
     }
     
-    //Completar
+    
+    /*public void caseCompraDeEstoque(Estoque estoque){
+        System.out.println("Qual produto você deseja comprar: pipoca, bebidas ou guloseimas? ");
+        String produtoComprado = sc.nextLine();
+        
+        System.out.println("Quantos produtos você deseja comprar? ");
+        int quantidadeComprado = sc.nextInt();
+        sc.nextLine();
+        
+        switch (produtoComprado){
+            case "pipoca" : 
+                int quantidadePipoca = estoque.getQuantidadePipoca();
+                quantidadePipoca = quantidadePipoca + quantidadeComprado;
+                estoque.setQuantidadePipoca(quantidadePipoca);
+                System.out.println("Informe a validade da pipoca: ");
+                String validadePipoca = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadePipoca);
+                break;
+            
+            case "bebidas" :
+                int quantidadeBebidas = estoque.getQuantidadeBebidas();
+                quantidadeBebidas = quantidadeBebidas + quantidadeComprado;
+                estoque.setQuantidadeBebidas(quantidadeBebidas);
+                String validadeBebidas = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadeBebidas);
+            
+            default :
+                int quantidadeGuloseimas = estoque.getQuantidadeGuloseimas();
+                quantidadeGuloseimas = quantidadeGuloseimas + quantidadeComprado;
+                estoque.setQuantidadeGuloseimas(quantidadeGuloseimas);
+                String validadeGuloseimas = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadeGuloseimas);
+        }
+    }*/
+    
     public void compraDeEstoque(Estoque estoque){
         System.out.println("Qual produto você deseja comprar: pipoca, bebidas ou guloseimas? ");
         String produtoComprado = sc.nextLine();
@@ -100,6 +134,31 @@ public class Proprietario extends Funcionario{
         System.out.println("Quantos produtos você deseja comprar? ");
         int quantidadeComprado = sc.nextInt();
         sc.nextLine();
+        
+        switch (produtoComprado){
+            case "pipoca" : 
+                int quantidadePipoca = estoque.getQuantidadePipoca();
+                quantidadePipoca = quantidadePipoca + quantidadeComprado;
+                estoque.setQuantidadePipoca(quantidadePipoca);
+                System.out.println("Informe a validade da pipoca: ");
+                String validadePipoca = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadePipoca);
+                break;
+            
+            case "bebidas" :
+                int quantidadeBebidas = estoque.getQuantidadeBebidas();
+                quantidadeBebidas = quantidadeBebidas + quantidadeComprado;
+                estoque.setQuantidadeBebidas(quantidadeBebidas);
+                String validadeBebidas = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadeBebidas);
+            
+            default :
+                int quantidadeGuloseimas = estoque.getQuantidadeGuloseimas();
+                quantidadeGuloseimas = quantidadeGuloseimas + quantidadeComprado;
+                estoque.setQuantidadeGuloseimas(quantidadeGuloseimas);
+                String validadeGuloseimas = sc.nextLine();
+                estoque.cadastrarProduto("Pipoca", validadeGuloseimas);
+        }
         
         
         if(produtoComprado.equals("pipoca")){
