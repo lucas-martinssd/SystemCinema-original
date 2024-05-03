@@ -90,24 +90,6 @@ public class Sessao {
     }
 
     /**
-     * Solicita ao usuário que especifique a quantidade de ingressos que deseja
-     * comprar. O método lê a entrada do usuário e retorna o número de
-     * ingressos.
-     *
-     * @return A quantidade de ingressos escolhida pelo usuário como um inteiro.
-     */
-    public int selecionarQuantIngressos() {
-        
-            System.out.println("Informe quantos ingressos deseja comprar:");
-            
-            int ingressos = Integer.parseInt(scanner.nextLine());
-            System.out.println("Você selecionou " + ingressos + " ingressos.");
-            return ingressos; // Retorna a quantidade de ingressos
-        
-
-    }
-
-    /**
      * Permite ao usuário selecionar poltronas para uma sessão específica. O
      * método solicita ao usuário que selecione poltronas individuais para cada
      * ingresso comprado. Ele mostra os assentos disponíveis e permite ao

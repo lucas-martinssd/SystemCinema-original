@@ -28,7 +28,7 @@ public class Caixa {
     }
     
     public double informaValorIngressos(Carrinho carrinho){
-        double valorIngressos = carrinho.selecionarQuantidadeIngresssos() * 10;
+        double valorIngressos = carrinho.selecionarQuantIngressos() * 10;
         System.out.println("O valor dos ingressos desejados é: R$ " + valorIngressos);
         return valorIngressos;
     }

@@ -66,19 +66,20 @@ public class Carrinho {
         this.sessao = sessao;
     }
 
-    public Produto selecionarProduto() {
+    public Produto selecionarProduto(Estoque estoque) {
         System.out.println("Produtos disponíveis: ");
         estoque.listarProdutos();
-        System.out.println("\nInforme o produto que deseja assistir:");
+        System.out.println("\nInforme o produto você deseja: ");
         String selecionaProduto = scanner.nextLine();
 
         for (Produto produto : estoque.getProduto()) {
             if (produto.getNome().equalsIgnoreCase(selecionaProduto)) {
-                System.out.println("Você selecionou: " + produto.getNome() + " ingresso(s)");
+                System.out.println("Você selecionou: " + produto.getNome());
+                selecionarQuantProduto();
                 return produto;
             }
         }
-        System.out.println("Filme não encontrado.");
+        System.out.println("Produto não encontrado.");
 
         return null; // Retorna null se o produto nao for encontrado
     }
@@ -93,9 +94,19 @@ public class Carrinho {
 
     }
     
-    public int selecionarQuantidadeIngresssos(){
-        System.out.println("Informe quantos ingressos você deseja: ");
-        int quantidadeIngressos = scanner.nextInt();
-        return quantidadeIngressos;
+    /**
+     * Solicita ao usuário que especifique a quantidade de ingressos que deseja
+     * comprar. O método lê a entrada do usuário e retorna o número de
+     * ingressos.
+     *
+     * @return A quantidade de ingressos escolhida pelo usuário como um inteiro.
+     */
+    public int selecionarQuantIngressos() {
+        
+            System.out.println("Informe quantos ingressos deseja comprar:");
+            
+            int ingressos = Integer.parseInt(scanner.nextLine());
+            System.out.println("Você selecionou " + ingressos + " ingressos.");
+            return ingressos; // Retorna a quantidade de ingressos
     }
 }
