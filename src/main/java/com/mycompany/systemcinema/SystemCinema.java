@@ -13,10 +13,17 @@ import java.time.Duration;
 public class SystemCinema {
     
     public static void main(String[] args) {
+        Sistema sistema = new Sistema();
+        Cliente cliente = new Cliente();
+        Sessao sessao = new Sessao();
+        GestaoDeFilmes gestaoDeFilmes = new GestaoDeFilmes();
         Estoque estoque = new Estoque();
-        Carrinho carrinho = new Carrinho(estoque);
-        Caixa caixa = new Caixa();
+        Funcionario funcionario = new Funcionario();
+        GestaoDeClientes gestaoDeClientes = new GestaoDeClientes();
+        Carrinho carrinho = new Carrinho();
+        Proprietario proprietario = new Proprietario();
         
-        carrinho.selecionarProduto(estoque);
+        sistema.informarClienteOuFuncionarioOuProprietario(cliente, sessao, gestaoDeFilmes, carrinho, estoque, funcionario, 
+                gestaoDeClientes, proprietario);
     }
 }

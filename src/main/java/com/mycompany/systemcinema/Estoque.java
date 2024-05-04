@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 /**
  * Classe para armazenar e detalhar o Estoque.
  * <p>
@@ -30,6 +31,8 @@ public class Estoque
     private int quantidadePipoca;
     private int quantidadeBebidas;
     private int quantidadeGuloseimas;
+    
+    Scanner sc = new Scanner(System.in);
     
     /**
      * Contrutor que Estoque recebe um ArrayList.
@@ -62,8 +65,10 @@ public class Estoque
      * @param nome nome do filme.
      * @return O produto removido.
      */
-    public boolean removerProduto(String nome)
+    public boolean removerProduto()
     {   
+        System.out.println("Qual o nome do produto que deseja ? ");
+        String nome = sc.nextLine();
         return produto.removeIf(x -> x.getNome().equals(nome));
     }
     
