@@ -3,74 +3,84 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.systemcinema;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 import java.util.Scanner;
+
 /**
- * Classe para fazer a gestao de filmes.
+ * Classe responsável pela gestão de filmes no sistema de cinema.
  * <p>
- * Esta classe é usada para gerir os filmes, tanto o filme em específico, como cadastrar um novo filme e remover um filme.
+ * Esta classe permite operações como cadastrar um novo filme, remover um filme existente e listar todos os filmes.
  * </p>
  *
  * @author enzov
  * @version 1.0
  */
-public class GestaoDeFilmes 
-{   
-    public static int CONTADOR_FILME;
-    
-    Scanner sc = new Scanner(System.in);
-    private Filme filme;
+public class GestaoDeFilmes {
     
     /**
-     * Lista para criar diversos filmes.
+     * Lista para armazenar os filmes.
      */
     private List<Filme> filmes = new ArrayList<>();
+    
     /**
-     * Contrutor que filmes recebe um ArrayList.
-     * @param filmes direciona a todos os atributos da classe Filme
+     * Scanner para entrada de dados.
      */
-    public GestaoDeFilmes(List<Filme> filmes) 
-    {
-        this.filmes = new ArrayList<>();
+    private Scanner sc = new Scanner(System.in);
+    
+    /**
+     * Contador estático para controlar o número de filmes cadastrados.
+     */
+    public static int CONTADOR_FILME;
+    
+    /**
+     * Construtor que inicializa a lista de filmes com uma lista existente.
+     * @param filmes Lista pré-existente de filmes.
+     */
+    public GestaoDeFilmes(List<Filme> filmes) {
+        this.filmes = new ArrayList<>(filmes);
     }
-    public GestaoDeFilmes(){}
+
     /**
-     * Cadastra um filme na lista de filmes.
-     * @param nome nome do filme.
-     * @param genero genero do filme.
-     * @param duracao duracao do filme.
+     * Construtor padrão que não inicializa a lista com filmes pré-existentes.
      */
-    public Filme cadastraFilme()
-    {
+    public GestaoDeFilmes() {}
+
+    /**
+     * Método para cadastrar um filme na lista de filmes. Solicita ao usuário o nome, gênero e duração do filme.
+     */
+    public void cadastraFilme() {
         System.out.println("Qual o nome do filme? ");
         String nome = sc.nextLine();
-        System.out.println("Qual o genero do filme? ");
+        System.out.println("Qual o gênero do filme? ");
         String genero = sc.nextLine();
         System.out.println("Qual a duração do filme? (formato HH:MM:SS)");
-        String duracaoSrt = sc.nextLine();
-        Duration duracao = Duration.parse("PT" + duracaoSrt);
+        String duracaoStr = sc.nextLine();
+        Duration duracao = Duration.parse("PT" + duracaoStr.replace(":", "H") + "M");
         Filme novoFilme = new Filme(nome, genero, duracao);
-        this.filmes.add(new Filme(nome,genero,duracao));
+        this.filmes.add(novoFilme);
         CONTADOR_FILME++;
-        return novoFilme;
     }
-     
+
     /**
-     * Remove um filme da lista atravês de uma expressao lambda, em que caso X.getNome(chama o método getNome da clase Filme)e que em seguida compara o nome do filme X com o parâmetro nome. retorna True se forem iguais, removendo o filme da lista
-     * @param nome nome do filme.
-     * @return O filme removido.
+     * Método para remover um filme da lista através de um nome especificado pelo usuário.
+     * Utiliza uma expressão lambda para comparar o nome do filme.
+     * @return Retorna true se o filme foi removido com sucesso, false caso contrário.
      */
-    public boolean removeFilme()
-    {
+    public boolean removeFilme() {
         System.out.println("Qual o nome do filme que deseja remover? ");
         String nome = sc.nextLine();
         return filmes.removeIf(x -> x.getTitulo().equals(nome));
     }
-    
-    public List<Filme> getFilmes(){
-    return filmes;
-}
+
+    /**
+     * Método para obter a lista de filmes.
+     * @return Retorna a lista de filmes.
+     */
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
     
 }

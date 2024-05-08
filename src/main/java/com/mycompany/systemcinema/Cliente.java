@@ -50,11 +50,6 @@ public class Cliente extends Pessoa{
     Scanner sc = new Scanner(System.in);
     
     /**
-     * Construtor padrão da classe Cliente.
-     */
-    public Cliente(){};
-    
-    /**
      * Construtor com informações do cliente.
      * 
      * @param name O nome do cliente.

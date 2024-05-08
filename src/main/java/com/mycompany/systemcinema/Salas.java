@@ -5,9 +5,9 @@
 package com.mycompany.systemcinema;
 
 /**
- * Classe para representar detalhes da sala.
+ * Classe que representa uma sala de cinema.
  * <p>
- * Esta classe é usada para armazenar informações de sala.
+ * Armazena informações sobre uma sala de cinema, incluindo seu número, a configuração dos assentos e o filme sendo exibido.
  * </p>
  *
  * @author enzov
@@ -16,81 +16,103 @@ package com.mycompany.systemcinema;
 public class Salas {
 
     /**
-     * numero da sala.
+     * Número identificador da sala.
      */
     private int sala;
+
     /**
-     * quantidade de assentos de uma sala, quantidade constante, sendo 64
+     * Quantidade constante de assentos na sala, definida como 64.
      */
     private final int NUMERO_ASSENTOS = 64;
 
-    private boolean[][] assentos = new boolean[8][8];
     /**
-     * Atributos filme, do tipo que filme que recebe todas as informações da
-     * classe filme
+     * Matriz de assentos na sala, onde cada assento é representado por um booleano (true se ocupado, false se disponível).
+     */
+    private boolean[][] assentos = new boolean[8][8];
+
+    /**
+     * Filme atualmente exibido nesta sala.
      */
     private Filme filme;
 
+    /**
+     * Retorna o número da sala.
+     *
+     * @return O número identificador da sala.
+     */
     public int getSala() {
         return sala;
     }
 
+    /**
+     * Define o número da sala.
+     *
+     * @param sala O novo número da sala.
+     */
     public void setSala(int sala) {
         this.sala = sala;
     }
 
+    /**
+     * Retorna o filme sendo exibido na sala.
+     *
+     * @return O filme atual.
+     */
     public Filme getFilme() {
         return filme;
     }
 
+    /**
+     * Define o filme a ser exibido nesta sala.
+     *
+     * @param filme O filme a ser exibido.
+     */
     public void setFilme(Filme filme) {
         this.filme = filme;
     }
 
     /**
-     * Constrói um novo produto sem informação.
-     *
+     * Construtor padrão que cria uma sala sem informações iniciais.
      */
-    public Salas() {
-    }
+    public Salas() {}
 
     /**
-     * Constrói uma nova sala apenas com o atributo sala.
+     * Constrói uma nova sala com um número identificador.
      *
+     * @param sala O número da sala.
      */
     public Salas(int sala) {
         this.sala = sala;
     }
 
     /**
-     * Constrói uma nova sala com as informações sala e o filme.
+     * Constrói uma nova sala com um número e um filme especificados.
      *
+     * @param sala O número da sala.
+     * @param filme O filme a ser exibido na sala.
      */
     public Salas(int sala, Filme filme) {
         this.sala = sala;
         this.filme = filme;
-        inicializarAssentos();
     }
 
     /**
-     * Constrói uma nova sala com as informações sala e o filme.
-     *
+     * Inicializa todos os assentos da sala como disponíveis.
      */
-    private void inicializarAssentos() {
+    public void inicializarAssentos() {
         for (int i = 0; i < assentos.length; i++) {
             for (int j = 0; j < assentos[i].length; j++) {
-                assentos[i][j] = false; // Falso significa que o assento está disponível
+                assentos[i][j] = false; // Assento disponível
             }
         }
     }
 
     /**
-     * Tenta reservar um assento específico na sala.
+     * Tenta reservar um assento na sala.
      *
      * @param fila A fila do assento a ser reservado.
      * @param coluna A coluna do assento a ser reservado.
-     * @return {@code true} se o assento foi reservado com sucesso,
-     * {@code false} se o assento já estava ocupado.
+     * @return {@code true} se o assento foi reservado com sucesso, {@code false} se o assento já estava ocupado.
      */
     public boolean reservarAssento(int fila, int coluna) {
         if (!assentos[fila][coluna]) {
@@ -102,9 +124,10 @@ public class Salas {
     }
 
     /**
-     * Mostra o estado atual dos assentos na sala. Este método imprime uma
-     * matriz dos assentos, onde 'X' representa um assento ocupado e 'O'
-     * representa um assento disponível.
+     * Exibe o estado atual dos assentos na sala.
+     * <p>
+     * Este método imprime uma matriz dos assentos, onde 'X' representa um assento ocupado e 'O' representa um assento disponível.
+     * </p>
      */
     public void mostrarAssentos() {
         for (int i = 0; i < assentos.length; i++) {

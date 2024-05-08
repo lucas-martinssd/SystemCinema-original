@@ -7,53 +7,76 @@ package com.mycompany.systemcinema;
 import java.time.LocalDate;
 
 /**
+ * Classe que representa um Produto dentro do sistema.
+ * <p>
+ * Esta classe é utilizada para gerenciar informações relacionadas a produtos, incluindo nome e data de validade.
+ * </p>
  *
- * @author Lucas
+ * @author enzov
+ * @version 1.0
  */
 public class Produto {
+    
     /**
-     * nome do produto.
+     * Nome do produto.
      */
     private String nome;
+    
     /**
-     * validade do produto.
+     * Data de validade do produto.
      */
     private LocalDate validade;
 
-    public String getNome() 
-    {
+    /**
+     * Retorna o nome do produto.
+     *
+     * @return O nome do produto.
+     */
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) 
-    {
+    /**
+     * Define o nome do produto.
+     *
+     * @param nome O novo nome do produto.
+     */
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public LocalDate getValidade() 
-    {
+    /**
+     * Retorna a data de validade do produto.
+     *
+     * @return A data de validade do produto.
+     */
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(LocalDate validade) 
-    {
+    /**
+     * Define a data de validade do produto.
+     *
+     * @param validade A nova data de validade do produto.
+     */
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
-     
+    
     /**
-     * Constrói um novo produto sem informação.
-     *
+     * Construtor padrão que cria um produto sem inicializar nome ou validade.
      */
-    public Produto(){}
+    public Produto() {}
 
     /**
-     * Constrói um novo usuário com nome e idade.
+     * Constrói um novo produto com nome e validade especificados.
      *
      * @param nome O nome do produto.
-     * @param validade a validade do produto.
+     * @param validade A data de validade do produto.
      */
     public Produto(String nome, LocalDate validade) {
         this.nome = nome;
         this.validade = validade;
     }
+    
 }

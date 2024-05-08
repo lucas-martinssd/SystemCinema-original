@@ -41,11 +41,6 @@ public class Funcionario extends Pessoa {
     private String loginFuncionarioOriginal = "Lucas";
 
     Scanner sc = new Scanner(System.in);
-    
-    /**
-     * Construtor padrão da classe Funcionario.
-     */
-    public Funcionario(){};
 
     /**
      * Construtor da classe Funcionario com informações do funcionário.
