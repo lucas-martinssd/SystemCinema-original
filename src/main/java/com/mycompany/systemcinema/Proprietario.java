@@ -17,18 +17,15 @@ public class Proprietario extends Funcionario{
     
     //Arrumar herança entre Funcionario e Proprietario, colocar Proprietario como composição de Gestão de Clientes tambem
     //Colocar função registroProprietario
-    private String loginProprietario;
-    private String senhaProprietario;
+    
     private String senhaProprietarioOriginal;
     private String loginProprietarioOriginal;
     private Estoque estoque;
       
     public Proprietario(){};
     
-    public Proprietario(String loginProprietario, String senhaProprietario, String senhaProprietarioOriginal, String loginProprietarioOriginal, String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
+    public Proprietario(String senhaProprietarioOriginal, String loginProprietarioOriginal, String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
-        this.loginProprietario = loginProprietario;
-        this.senhaProprietario = senhaProprietario;
         this.senhaProprietarioOriginal = senhaProprietarioOriginal;
         this.loginProprietarioOriginal = loginProprietarioOriginal;
     }
@@ -44,9 +41,9 @@ public class Proprietario extends Funcionario{
         boolean loginValido = false;
         while (!loginValido) {
             System.out.println("Informe o seu login: ");
-            loginProprietario = sc.nextLine();
+            String loginProprietario = sc.nextLine();
             System.out.println("Informe a sua senha: ");
-            senhaProprietario = sc.nextLine();
+            String senhaProprietario = sc.nextLine();
 
             if(loginProprietario.equals(loginProprietarioOriginal) && senhaProprietario.equals(senhaProprietarioOriginal)){
                 loginValido = true;
@@ -159,28 +156,12 @@ public class Proprietario extends Funcionario{
         }
     }
 
-    public String getLoginProprietario() {
-        return loginProprietario;
-    }
-
-    public String getSenhaProprietario() {
-        return senhaProprietario;
-    }
-
     public String getSenhaProprietarioOriginal() {
         return senhaProprietarioOriginal;
     }
 
     public String getLoginProprietarioOriginal() {
         return loginProprietarioOriginal;
-    }
-
-    public void setLoginProprietario(String loginProprietario) {
-        this.loginProprietario = loginProprietario;
-    }
-
-    public void setSenhaProprietario(String senhaProprietario) {
-        this.senhaProprietario = senhaProprietario;
     }
 
     public void setSenhaProprietarioOriginal(String senhaProprietarioOriginal) {

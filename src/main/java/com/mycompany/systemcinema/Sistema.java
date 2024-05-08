@@ -45,10 +45,13 @@ public class Sistema {
                 String acaoCliente = sc.nextLine();
                 
                 if (acaoCliente.equals("Selecionar Filme")){
-                    sessao.selecionarFilme(gestaoDeFilmes);
+                    carrinho.selecionarFilme(gestaoDeFilmes);
+                }
+                else if (acaoCliente.equals("Selecionar Produtos")) {
+                    carrinho.selecionarProduto(estoque);
                 }
                 else {
-                    carrinho.selecionarProduto(estoque);
+                    System.out.println("Função não existente");
                 }
             }
             else {
@@ -88,13 +91,16 @@ public class Sistema {
                     estoque.listarProdutos();
                 }
                 else if (acaoFuncionario.equals("Selecionar Filme")){
-                    sessao.selecionarFilme(gestaoDeFilmes);
+                    carrinho.selecionarFilme(gestaoDeFilmes);
                 }
                 else if (acaoFuncionario.equals("Selecionar Produto")){
                     carrinho.selecionarProduto(estoque);
                 }
                 else if (acaoFuncionario.equals("Cadastrar Funcionario")){
                     funcionario.funcionarioRealizarCadastro();
+                }
+                else {
+                    System.out.println("Função não existente");
                 }
             }
             else {
@@ -140,13 +146,16 @@ public class Sistema {
                     estoque.listarProdutos();
                 }
                 else if (acaoFuncionario.equals("Selecionar Filme")){
-                    sessao.selecionarFilme(gestaoDeFilmes);
+                    carrinho.selecionarFilme(gestaoDeFilmes);
                 }
                 else if (acaoFuncionario.equals("Selecionar Produto")){
                     carrinho.selecionarProduto(estoque);
                 }
                 else if (acaoFuncionario.equals("Cadastrar Funcionario")){
                     funcionario.funcionarioRealizarCadastro();
+                }
+                else {
+                    System.out.println("Função não existente");
                 }
             }
             else {

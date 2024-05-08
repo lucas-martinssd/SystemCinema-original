@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
- * Classe para representar os Clientes usada para armazernar caracteristicas do Cliente e realizar suas funções
+ * Classe para representar os clientes utilizada para armazenar características do cliente e realizar suas funções.
  * <p>
- * É usada para armazernar suas caracteristicas como preferencias, login e senha e realizar o seu cadastro e entrar no sistema
- * <p>
+ * É usada para armazenar suas características como preferências, login e senha e realizar o seu cadastro e entrar no sistema.
+ * </p>
  * 
  * @author Lucas
  */
@@ -21,50 +21,52 @@ public class Cliente extends Pessoa{
     //Arrumar pessoa: Pessoa e dois preferenciasDeFilme: String no UML
     
     /**
-     * nome da preferencia por filme
+     * Nome da preferência por filme.
      */
     private String preferenciaDeFilme;
     /**
-     * nome da preferencia por genero
+     * Nome da preferência por gênero.
      */
     private String preferenciaDeGenero;
     /**
-     * login registrado do cliente
+     * Login registrado do cliente.
      */
     private String loginClienteOriginal;
     /**
-     * senha registrada do cliente
+     * Senha registrada do cliente.
      */
     private String senhaClienteOriginal;
     /**
-     * login usado pelo cliente para entrar no sistema
+     * Login usado pelo cliente para entrar no sistema.
      */
     private String loginCliente;
     /**
-     * senha usada pelo cliente para entrar no sistema
+     * Senha usada pelo cliente para entrar no sistema.
      */
     private String senhaCliente;
+    
+    public static int CONTADOR_CLIENTE;
     
     Scanner sc = new Scanner(System.in);
     
     /**
-     * Construtor padrao da classe Cliente
+     * Construtor padrão da classe Cliente.
      */
     public Cliente(){};
     
     /**
-     * Construtor com inforações do cliente
+     * Construtor com informações do cliente.
      * 
-     * @param name O nome do cliente
-     * @param sobrenome O sobrenome do cliente
-     * @param endereco O endereço do cliente
-     * @param telefone O telefone do cliente
-     * @param cpf O cpf do cliente
-     * @param aniversario A data de nascimento do cliente
-     * @param preferenciaDeFilme O filme de preferencia do cliente
-     * @param preferenciaDeGenero O genero de filme de preferencia do cliente
-     * @param loginClienteOriginal O login registado do cliente
-     * @param senhaClienteOriginal A senha registrada do cliente
+     * @param name O nome do cliente.
+     * @param sobrenome O sobrenome do cliente.
+     * @param endereco O endereço do cliente.
+     * @param telefone O telefone do cliente.
+     * @param cpf O CPF do cliente.
+     * @param aniversario A data de nascimento do cliente.
+     * @param preferenciaDeFilme O filme de preferência do cliente.
+     * @param preferenciaDeGenero O gênero de filme de preferência do cliente.
+     * @param loginClienteOriginal O login registrado do cliente.
+     * @param senhaClienteOriginal A senha registrada do cliente.
      */
     public Cliente(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, 
             String preferenciaDeFilme, String preferenciaDeGenero, String loginClienteOriginal,
@@ -74,25 +76,27 @@ public class Cliente extends Pessoa{
         this.preferenciaDeFilme = preferenciaDeGenero;
         this.loginClienteOriginal = loginClienteOriginal;
         this.senhaClienteOriginal = senhaClienteOriginal;
+        CONTADOR_CLIENTE++;
     }
     
     /**
-     * Construtor com somente as informações herdadas da classe Pessoa
+     * Construtor com somente as informações herdadas da classe Pessoa.
      * 
-     * @param name O nome do cliente
-     * @param sobrenome O sobrenome do cliente
-     * @param endereco O endereço do cliente
-     * @param telefone O telefone do cliente
-     * @param cpf O cpf do cliente
-     * @param aniversario A data de nascimento do cliente
+     * @param name O nome do cliente.
+     * @param sobrenome O sobrenome do cliente.
+     * @param endereco O endereço do cliente.
+     * @param telefone O telefone do cliente.
+     * @param cpf O CPF do cliente.
+     * @param aniversario A data de nascimento do cliente.
      */
     public Cliente(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
     }
     
     /**
-     * Solicia o login e a senha do cliente para ele entrar no sistema, se a senha e login forem corretos 
-     * o cliente entrara no sistema, se não forem vão pedir novamente o login e a senha
+     * Solicita o login e a senha do cliente para ele entrar no sistema. 
+     * Se a senha e login forem corretos o cliente entrará no sistema, 
+     * se não forem vão pedir novamente o login e a senha.
      * 
      */
     public void clienteRealizarLogin(){
@@ -113,6 +117,9 @@ public class Cliente extends Pessoa{
         }
     }
     
+    /**
+     * Realiza o cadastro do cliente no sistema, solicitando suas informações.
+     */
     public void clienteRealizarCadastro(){
         System.out.println("Qual o seu nome: ");
         String name = sc.nextLine();
@@ -130,21 +137,21 @@ public class Cliente extends Pessoa{
         String telefone = sc.nextLine();
         setTelefone(telefone);
         
-        System.out.println("Qual o seu cpf: ");
+        System.out.println("Qual o seu CPF: ");
         String cpf = sc.nextLine();
         setCpf(cpf);
         
-        System.out.println("Qual a sua data de nascimento: ");
+        System.out.println("Qual a sua data de nascimento (formato dd/MM/yyyy): ");
         String aniversarioTexto = sc.nextLine();
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
         setAniversario(aniversario);
         
         System.out.println("Qual vai ser o seu login: ");
-        String loginClienteOriginal = sc.nextLine();
+        loginClienteOriginal = sc.nextLine();
         
         System.out.println("Qual vai ser a sua senha: ");
-        String senhaClienteOriginal = sc.nextLine();
+        senhaClienteOriginal = sc.nextLine();
     }
     
      public String getPreferenciaDeFilme() {

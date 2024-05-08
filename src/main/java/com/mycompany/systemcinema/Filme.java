@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.systemcinema;
-import java.time.Duration;
 
+import java.time.Duration;
 
 /**
  * Classe para representar atributos de um Filme.
  * <p>
- * Esta classe é usada para armazenar características de um Filme como nome, genero e duração.
+ * Esta classe é usada para armazenar características de um Filme como nome, gênero e duração.
  * </p>
  *
  * @author enzov
@@ -18,49 +18,85 @@ import java.time.Duration;
 public class Filme 
 {   
     /**
-     * nome do filme.
+     * O nome do filme.
      */
     private String titulo;
     
     /**
-     * genero do Filme.
+     * O gênero do Filme.
      */
     private String genero;
+    
     /**
-     * duração do Filme.
+     * A duração do Filme.
      */
     private Duration duracao;
 
+    /**
+     * Obtém o título do filme.
+     * 
+     * @return O título do filme.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Define o título do filme.
+     * 
+     * @param titulo O título do filme.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * Obtém o gênero do filme.
+     * 
+     * @return O gênero do filme.
+     */
     public String getGenero() {
         return genero;
     }
 
+    /**
+     * Define o gênero do filme.
+     * 
+     * @param genero O gênero do filme.
+     */
     public void setGenero(String genero) {
         this.genero = genero;
     }
 
+    /**
+     * Obtém a duração do filme.
+     * 
+     * @return A duração do filme.
+     */
     public Duration getDuracao() {
         return duracao;
     }
 
+    /**
+     * Define a duração do filme.
+     * 
+     * @param duracao A duração do filme.
+     */
     public void setDuracao(Duration duracao) {
         this.duracao = duracao;
     }
-    public Filme(){}
+    
     /**
-     * Constrói um novo usuário com nome e idade.
+     * Construtor padrão da classe Filme.
+     */
+    public Filme(){}
+
+    /**
+     * Constrói um novo filme com título, gênero e duração.
      *
-     * @param titulo O nome do filme.
-     * @param idade o genero do filme.
-     * @param duracao a duração do filme
+     * @param titulo O título do filme.
+     * @param genero O gênero do filme.
+     * @param duracao A duração do filme.
      */
     public Filme(String titulo, String genero, Duration duracao) {
         this.titulo = titulo;
@@ -69,8 +105,9 @@ public class Filme
     }
     
     /**
-     * sobrescreve o ToString para que mostre o nome, genero e duracao na tal formatação.
+     * Sobrescreve o método toString para retornar o título, gênero e duração do filme.
      *
+     * @return Uma string que representa o filme no formato "Título, Gênero, Duração".
      */
     @Override
     public String toString() {

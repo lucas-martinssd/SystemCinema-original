@@ -18,7 +18,10 @@ import java.util.Scanner;
  */
 public class GestaoDeFilmes 
 {   
+    public static int CONTADOR_FILME;
+    
     Scanner sc = new Scanner(System.in);
+    private Filme filme;
     
     /**
      * Lista para criar diversos filmes.
@@ -39,7 +42,7 @@ public class GestaoDeFilmes
      * @param genero genero do filme.
      * @param duracao duracao do filme.
      */
-    public void cadastraFilme()
+    public Filme cadastraFilme()
     {
         System.out.println("Qual o nome do filme? ");
         String nome = sc.nextLine();
@@ -48,8 +51,10 @@ public class GestaoDeFilmes
         System.out.println("Qual a duração do filme? (formato HH:MM:SS)");
         String duracaoSrt = sc.nextLine();
         Duration duracao = Duration.parse("PT" + duracaoSrt);
-        
+        Filme novoFilme = new Filme(nome, genero, duracao);
         this.filmes.add(new Filme(nome,genero,duracao));
+        CONTADOR_FILME++;
+        return novoFilme;
     }
      
     /**
