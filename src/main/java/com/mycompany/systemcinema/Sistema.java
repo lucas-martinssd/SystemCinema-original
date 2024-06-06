@@ -79,7 +79,7 @@ public class Sistema {
                 String acaoFuncionario = sc.nextLine();
 
                 if (acaoFuncionario.equals("Cadastrar Cliente")) {
-                    gestaoDeClientes.cadastroDeCliente(cliente);
+                    gestaoDeClientes.cadastroDeCliente();
                 } else if (acaoFuncionario.equals("Editar Cadastro Cliente")) {
                     gestaoDeClientes.editarCadastroCliente(cliente);
                 } else if (acaoFuncionario.equals("Cadastrar Filme")) {
@@ -121,7 +121,7 @@ public class Sistema {
                 } else if (acaoFuncionario.equals("Comprar Estoque")) {
                     proprietario.compraDeEstoque(estoque);
                 } else if (acaoFuncionario.equals("Cadastrar Cliente")) {
-                    gestaoDeClientes.cadastroDeCliente(cliente);
+                    gestaoDeClientes.cadastroDeCliente();
                 } else if (acaoFuncionario.equals("Editar Cadastro Cliente")) {
                     gestaoDeClientes.editarCadastroCliente(cliente);
                 } else if (acaoFuncionario.equals("Cadastrar Filme")) {
@@ -146,6 +146,132 @@ public class Sistema {
                 informarClienteOuFuncionarioOuProprietario(cliente, sessao, gestaoDeFilmes, carrinho, estoque,
                         funcionario, gestaoDeClientes, proprietario);
             }
+        }
+    }
+    public void informarClienteOuFuncionarioOuProprietario(Pessoa pessoa, Carrinho carrinho, Caixa caixa, Estoque estoque, GestaoDeFilmes gestaoDeFilmes, GestaoDeClientes gestaoDeClientes, Proprietario proprietario, Cliente cliente) {
+        if (pessoa.getCategoria().equals("Cliente")) {
+            acessarCarrinhoOuCaixa(pessoa, carrinho, caixa, gestaoDeFilmes, estoque);
+        } else if (pessoa.getCategoria().equals("Funcionario")) {
+            acessarFuncionario(pessoa, carrinho, caixa, estoque, gestaoDeFilmes, gestaoDeClientes, cliente);
+        } else if (pessoa.getCategoria().equals("Proprietario")) {
+            acessarProprietario(pessoa, carrinho, caixa, estoque, gestaoDeFilmes, gestaoDeClientes, proprietario, cliente);
+        }
+    }
+
+    private void acessarCarrinhoOuCaixa(Pessoa pessoa, Carrinho carrinho, Caixa caixa, GestaoDeFilmes gestaoDeFilmes, Estoque estoque) {
+        System.out.println("Bem vindo ao CineDjamas! Escolha a sua ação: Carrinho ou Caixa");
+        String acaoCliente = sc.nextLine();
+
+        if (acaoCliente.equals("Carrinho")) {
+            // Lógica para acessar o carrinho
+            carrinho.selecionarFilme(gestaoDeFilmes); // Exemplo de método do carrinho
+            carrinho.selecionarPoltronas(0,0);
+            carrinho.selecionarProduto(estoque);
+            carrinho.selecionarQuantIngressos();
+            carrinho.selecionarQuantProduto();
+            
+        } else if (acaoCliente.equals("Caixa")) {
+            // Lógica para acessar o caixa
+            caixa.informaValorIngressos(carrinho); // Exemplo de método do caixa
+            caixa.informaValorProdutos(carrinho);
+            caixa.realizaPagamento(carrinho);
+            caixa.cancelaPagamento();
+        } else {
+            System.out.println("Função não existente");
+        }
+    }
+
+    private void acessarFuncionario(Pessoa pessoa, Carrinho carrinho, Caixa caixa, Estoque estoque, GestaoDeFilmes gestaoDeFilmes, GestaoDeClientes gestaoDeClientes, Cliente cliente) {
+        System.out.println("Bem vindo ao CineDjamas! Escolha a sua ação: Cadastrar Cliente, Editar Cadastro Cliente, Cadastrar Filmes, Remover Filmes, Remover Produto, Listar Produtos, Selecionar Filme, Selecionar Produto, Cadastrar Funcionario, Carrinho ou Caixa");
+        String acaoFuncionario = sc.nextLine();
+
+        switch (acaoFuncionario) {
+            case "Cadastrar Cliente":
+                gestaoDeClientes.cadastroDeCliente();
+                break;
+            case "Editar Cadastro Cliente":
+                gestaoDeClientes.editarCadastroCliente(cliente);
+                break;
+            case "Cadastrar Filme":
+                gestaoDeFilmes.cadastraFilme();
+                break;
+            case "Remover Filmes":
+                gestaoDeFilmes.removeFilme();
+                break;
+            case "Remover Produto":
+                estoque.removerProduto();
+                break;
+            case "Listar Produtos":
+                estoque.listarProdutos();
+                break;
+            case "Selecionar Filme":
+                carrinho.selecionarFilme(gestaoDeFilmes);
+                break;
+            case "Selecionar Produto":
+                carrinho.selecionarProduto(estoque);
+                break;
+            case "Cadastrar Funcionario":
+                // Lógica para cadastrar funcionário
+                break;
+            case "Carrinho":
+                acessarCarrinhoOuCaixa(pessoa, carrinho, caixa, gestaoDeFilmes, estoque);
+                break;
+            case "Caixa":
+                acessarCarrinhoOuCaixa(pessoa, carrinho, caixa, gestaoDeFilmes, estoque);
+                break;
+            default:
+                System.out.println("Função não existente");
+                break;
+        }
+    }
+
+    private void acessarProprietario(Pessoa pessoa, Carrinho carrinho, Caixa caixa, Estoque estoque, GestaoDeFilmes gestaoDeFilmes, GestaoDeClientes gestaoDeClientes, Proprietario proprietario, Cliente cliente) {
+        System.out.println("Bem vindo ao CineDjamas! Escolha a sua ação: Registrar Proprietario, Comprar Estoque, Cadastrar Cliente, Editar Cadastro Cliente, Cadastrar Filmes, Remover Filmes, Remover Produto, Listar Produtos, Selecionar Filme, Selecionar Produto, Cadastrar Funcionario, Carrinho ou Caixa");
+        String acaoProprietario = sc.nextLine();
+
+        switch (acaoProprietario) {
+            case "Registrar Proprietario":
+                proprietario.registroProprietario();
+                break;
+            case "Comprar Estoque":
+                proprietario.compraDeEstoque(estoque);
+                break;
+            case "Cadastrar Cliente":
+                gestaoDeClientes.cadastroDeCliente();
+                break;
+            case "Editar Cadastro Cliente":
+                gestaoDeClientes.editarCadastroCliente(cliente);
+                break;
+            case "Cadastrar Filme":
+                gestaoDeFilmes.cadastraFilme();
+                break;
+            case "Remover Filmes":
+                gestaoDeFilmes.removeFilme();
+                break;
+            case "Remover Produto":
+                estoque.removerProduto();
+                break;
+            case "Listar Produtos":
+                estoque.listarProdutos();
+                break;
+            case "Selecionar Filme":
+                carrinho.selecionarFilme(gestaoDeFilmes);
+                break;
+            case "Selecionar Produto":
+                carrinho.selecionarProduto(estoque);
+                break;
+            case "Cadastrar Funcionario":
+                // Lógica para cadastrar funcionário
+                break;
+            case "Carrinho":
+                acessarCarrinhoOuCaixa(pessoa, carrinho, caixa, gestaoDeFilmes, estoque);
+                break;
+            case "Caixa":
+                acessarCarrinhoOuCaixa(pessoa, carrinho, caixa, gestaoDeFilmes, estoque);
+                break;
+            default:
+                System.out.println("Função não existente");
+                break;
         }
     }
 }

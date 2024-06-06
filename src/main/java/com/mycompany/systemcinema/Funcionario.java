@@ -21,24 +21,14 @@ import java.util.Scanner;
 public class Funcionario extends Pessoa {
     
     /**
-     * O login do funcionário.
-     */
-    private String loginFuncionario;
-    
-    /**
-     * A senha do funcionário.
-     */
-    private String senhaFuncionario;
-    
-    /**
      * A senha original do funcionário.
      */
-    private String senhaFuncionarioOriginal = "senha";
+    private String senhaFuncionarioOriginal;
     
     /**
      * O login original do funcionário.
      */
-    private String loginFuncionarioOriginal = "Lucas";
+    private String loginFuncionarioOriginal;
 
     Scanner sc = new Scanner(System.in);
 
@@ -56,14 +46,13 @@ public class Funcionario extends Pessoa {
      * @param cpf O CPF do funcionário.
      * @param aniversario A data de nascimento do funcionário.
      */
-    public Funcionario(String loginFuncionario, String senhaFuncionario, String senhaFuncionarioOriginal, String loginFuncionarioOriginal, String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
+    public Funcionario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaFuncionarioOriginal, String loginFuncionarioOriginal) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
-        this.loginFuncionario = loginFuncionario;
-        this.senhaFuncionario = senhaFuncionario;
         this.senhaFuncionarioOriginal = senhaFuncionarioOriginal;
-        this.loginFuncionarioOriginal = loginFuncionarioOriginal; 
+        this.loginFuncionarioOriginal = loginFuncionarioOriginal;
+        setCategoria("Funcionario");
     }
-
+    
     /**
      * Construtor da classe Funcionario com informações herdadas da classe Pessoa.
      * 
@@ -83,7 +72,7 @@ public class Funcionario extends Pessoa {
      * Solicita o login e a senha do funcionário para acessar o sistema.
      * Se o login e a senha estiverem corretos, o funcionário é autenticado.
      */
-    public void funcionarioRealizarLogin(){
+    public void funcionarioRealizarLogin(String loginFuncionario, String senhaFuncionario){
         boolean loginValido = false;
         
         while (!loginValido) {
@@ -142,28 +131,12 @@ public class Funcionario extends Pessoa {
 
     // Métodos getters e setters omitidos para concisão
 
-    public String getLoginFuncionario() {
-        return loginFuncionario;
-    }
-
-    public String getSenhaFuncionario() {
-        return senhaFuncionario;
-    }
-
     public String getSenhaFuncionarioOriginal() {
         return senhaFuncionarioOriginal;
     }
 
     public String getLoginFuncionarioOriginal() {
         return loginFuncionarioOriginal;
-    }
-
-    public void setLoginFuncionario(String loginFuncionario) {
-        this.loginFuncionario = loginFuncionario;
-    }
-
-    public void setSenhaFuncionario(String senhaFuncionario) {
-        this.senhaFuncionario = senhaFuncionario;
     }
 
     public void setSenhaFuncionarioOriginal(String senhaFuncionarioOriginal) {
@@ -174,5 +147,19 @@ public class Funcionario extends Pessoa {
         this.loginFuncionarioOriginal = loginFuncionarioOriginal;
     }
     
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "nome = " + getName() +
+                ", sobrenome = " + getSobrenome() +
+                ", endereço = " + getEndereco() +
+                ", telefone = " + getTelefone() +
+                ", CPF = " + getCpf() +
+                ", aniversario = " + getAniversario() +
+                ", login = " + getLoginFuncionarioOriginal() +
+                ", senha = " + getSenhaFuncionarioOriginal() +
+                '}';
+    }
+
 }
 

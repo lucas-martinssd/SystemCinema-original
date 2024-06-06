@@ -21,6 +21,7 @@ public class Pessoa {
     private String telefone;
     private String cpf;
     private LocalDate aniversario;
+    private String categoria;
 
     /**
      * Construtor para inicializar uma nova pessoa com todos os detalhes necessários.
@@ -148,4 +149,37 @@ public class Pessoa {
     public void setAniversario(LocalDate aniversario) {
         this.aniversario = aniversario;
     }
+
+    /**
+     * Retorna a categoria da pessoa.
+     * 
+     * @return A categoria da pessoa.
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+    
+    /**
+     * Define a categoria da pessoa.
+     * 
+     * @param categoria A nova categoria da pessoa.
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome = " + getName() +
+                ", sobrenome = " + getSobrenome() +
+                ", endereço = " + getEndereco() +
+                ", telefone = " + getTelefone() +
+                ", CPF = " + getCpf() +
+                ", aniversario = " + getAniversario() +
+                '}';
+    }
+    
 }

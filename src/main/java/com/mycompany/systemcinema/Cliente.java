@@ -68,9 +68,10 @@ public class Cliente extends Pessoa{
             String senhaClienteOriginal) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
         this.preferenciaDeFilme = preferenciaDeFilme;
-        this.preferenciaDeFilme = preferenciaDeGenero;
+        this.preferenciaDeGenero = preferenciaDeGenero;
         this.loginClienteOriginal = loginClienteOriginal;
         this.senhaClienteOriginal = senhaClienteOriginal;
+        setCategoria("Cliente");
         CONTADOR_CLIENTE++;
     }
     
@@ -197,4 +198,20 @@ public class Cliente extends Pessoa{
         this.senhaCliente = senhaCliente;
     }
     
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome = " + getName() +
+                ", sobrenome = " + getSobrenome() +
+                ", endereço = " + getEndereco() +
+                ", telefone = " + getTelefone() +
+                ", CPF = " + getCpf() +
+                ", aniversario = " + getAniversario() +
+                ", preferencia de filme = " + getPreferenciaDeFilme() +
+                ", preferncia de genero = " + getPreferenciaDeGenero() +
+                ", login = " + getLoginClienteOriginal() +
+                ", senha = " + getSenhaClienteOriginal() +
+                '}';
+    }
+
 }

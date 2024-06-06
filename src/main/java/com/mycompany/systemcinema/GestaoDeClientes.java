@@ -6,6 +6,8 @@ package com.mycompany.systemcinema;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,47 +21,69 @@ import java.util.Scanner;
  */
 public class GestaoDeClientes {
 
+    private List<Cliente> listaDeClientes;
+    
     private Cliente cliente;
 
     Scanner sc = new Scanner(System.in);
-
+    
+    public GestaoDeClientes(){
+        listaDeClientes = new ArrayList<>();
+    }
+    
+    /**
+     * Método get da Lista de Clientes.
+     * 
+     * @return listaDeClientes.
+     */
+    public List<Cliente> getListaDeClientes(){
+        return listaDeClientes;
+    }
+    
     /**
      * Método para cadastrar um novo cliente.
      *
-     * @param cliente O objeto Cliente a ser cadastrado.
+     * 
      */
-    public void cadastroDeCliente(Cliente cliente) {
+    public void cadastroDeCliente() {
         System.out.println("Qual o nome do cliente: ");
         String name = sc.nextLine();
-        cliente.setName(name);
-
+        
         System.out.println("Qual o sobrenome do cliente: ");
         String sobrenome = sc.nextLine();
-        cliente.setSobrenome(sobrenome);
-
+        
         System.out.println("Qual o endereço do cliente: ");
         String endereco = sc.nextLine();
-        cliente.setEndereco(endereco);
-
+        
         System.out.println("Qual o telefone do cliente: ");
         String telefone = sc.nextLine();
-        cliente.setTelefone(telefone);
-
+        
         System.out.println("Qual o cpf do cliente: ");
         String cpf = sc.nextLine();
-        cliente.setCpf(cpf);
-
-        System.out.println("Qual a data de nascimento do cliente: ");
+        
+        System.out.println("Qual a data de nascimento do cliente (formato dd/MM/yyyy): ");
         String aniversarioTexto = sc.nextLine();
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
-        cliente.setAniversario(aniversario);
-
+        
+        System.out.println("Qual é a preferência de filme do cliente: ");
+        String preferenciaDeFilme = sc.nextLine();
+        
+        System.out.println("Qual é a preferência de gênero do cliente: ");
+        String preferenciaDeGenero = sc.nextLine();
+        
         System.out.println("Qual vai ser o login do cliente: ");
         String loginClienteOriginal = sc.nextLine();
-
+        
         System.out.println("Qual vai ser a senha do cliente: ");
         String senhaClienteOriginal = sc.nextLine();
+        
+        Cliente novoCliente = new Cliente(name, sobrenome, endereco, telefone, cpf, aniversario, 
+                                          preferenciaDeFilme, preferenciaDeGenero, loginClienteOriginal, senhaClienteOriginal);
+        
+        listaDeClientes.add(novoCliente);
+        
+        System.out.println("Cliente cadastrado com sucesso!");
     }
 
     /**
@@ -69,7 +93,7 @@ public class GestaoDeClientes {
      */
     public void editarCadastroCliente(Cliente cliente) {
         System.out.println("Qual informação vai ser alterada: name, sobrenome, endereco, telefone, cpf, "
-                + "senha ou login?");
+                + "preferencia de filme, preferencia de genero, senha ou login?");
         String alterada = sc.nextLine();
 
         if (alterada.equals("name")) {
@@ -92,6 +116,14 @@ public class GestaoDeClientes {
             System.out.println("Qual é o novo cpf? ");
             String novoCpf = sc.nextLine();
             cliente.setCpf(novoCpf);
+        } else if (alterada.equals("preferencia de filme")) {
+            System.out.println("Qual é a nova preferencia de filme? ");
+            String novaPreferenciaDeFilme = sc.nextLine();
+            cliente.setPreferenciaDeFilme(novaPreferenciaDeFilme);
+        } else if (alterada.equals("preferencia de genero")) {
+            System.out.println("Qual é a nova preferencia de genero? ");
+            String novaPreferenciaDeGenero = sc.nextLine();
+            cliente.setPreferenciaDeGenero(novaPreferenciaDeGenero);
         } else if (alterada.equals("senha")) {
             System.out.println("Qual é a nova senha? ");
             String novaSenha = sc.nextLine();
@@ -100,6 +132,26 @@ public class GestaoDeClientes {
             System.out.println("Qual é o novo login? ");
             String novoLogin = sc.nextLine();
             cliente.setLoginClienteOriginal(novoLogin);
+        }
+    }
+    
+    public void excluirCliente(){
+        System.out.println("Informe o CPF do cliente a ser removido: ");
+        String cpf = sc.nextLine();
+        
+        Cliente clienteParaRemover = null;
+        for (Cliente cliente : listaDeClientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                clienteParaRemover = cliente;
+                break;
+            }
+        }
+        
+        if (clienteParaRemover != null) {
+            listaDeClientes.remove(clienteParaRemover);
+            System.out.println("Cliente removido com sucesso!");
+        } else {
+            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
         }
     }
 }

@@ -38,10 +38,11 @@ public class Proprietario extends Funcionario {
      * @param cpf                       O CPF do proprietário.
      * @param aniversario               A data de nascimento do proprietário.
      */
-    public Proprietario(String senhaProprietarioOriginal, String loginProprietarioOriginal, String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
+    public Proprietario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaProprietarioOriginal, String loginProprietarioOriginal) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
         this.senhaProprietarioOriginal = senhaProprietarioOriginal;
         this.loginProprietarioOriginal = loginProprietarioOriginal;
+        setCategoria("Proprietario");
     }
 
     /**
@@ -135,6 +136,8 @@ public class Proprietario extends Funcionario {
             estoque.cadastrarProduto("Pipoca", validadeGuloseimas);
         }
     }
+    
+    
 
     /**
      * Obtém a senha original do proprietário.
@@ -170,6 +173,20 @@ public class Proprietario extends Funcionario {
      */
     public void setLoginProprietarioOriginal(String loginProprietarioOriginal) {
         this.loginProprietarioOriginal = loginProprietarioOriginal;
+    }
+
+    @Override
+    public String toString() {
+        return "Proprietario{" +
+                "nome = " + getName() +
+                ", sobrenome = " + getSobrenome() +
+                ", endereço = " + getEndereco() +
+                ", telefone = " + getTelefone() +
+                ", CPF = " + getCpf() +
+                ", aniversario = " + getAniversario() +
+                ", login = " + getLoginProprietarioOriginal() +
+                ", senha = " + getSenhaProprietarioOriginal() +
+                '}';
     }
 
 }
