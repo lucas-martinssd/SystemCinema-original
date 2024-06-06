@@ -21,7 +21,7 @@ import java.util.Scanner;
  */
 public class GestaoDeClientes {
 
-    private List<Cliente> listaDeClientes;
+    public List<Cliente> listaDeClientes;
     
     private Cliente cliente;
 

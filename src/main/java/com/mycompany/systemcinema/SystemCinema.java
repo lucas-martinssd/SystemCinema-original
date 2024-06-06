@@ -4,8 +4,10 @@
 
 package com.mycompany.systemcinema;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -13,7 +15,7 @@ import java.time.LocalDate;
  */
 public class SystemCinema {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         /**
         ///Questão 3
@@ -109,6 +111,11 @@ public class SystemCinema {
         }
         }
         */
+        Json json = new Json();
+        GestaoDeClientes gestaoClientes = new GestaoDeClientes();
+            gestaoClientes.cadastroDeCliente();
+            gestaoClientes.cadastroDeCliente();
+        json.salvarClientes(gestaoClientes.getListaDeClientes());
         
     }
 }
