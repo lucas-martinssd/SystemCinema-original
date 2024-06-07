@@ -4,92 +4,115 @@
  */
 package com.mycompany.systemcinema;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
- * Classe que representa uma sessão no sistema de cinema.
- * <p>
- * Esta classe é responsável por armazenar e gerenciar informações relativas às sessões de cinema, incluindo salas, filmes e horários das sessões.
- * </p>
  *
  * @author enzov
- * @version 1.0
  */
-public class Sessao {
+class Sessao
+{
 
-    /**
-     * Array que armazena as salas disponíveis para as sessões, com um total de 5 salas.
-     */
-    private final Salas[] salas = new Salas[5];
+    private Filme filme;
+    private Sala salas;
+    private LocalDateTime horarioInicio;
+    private LocalDateTime horarioTermino;
+    private int espectadores;
+    private static List<Sessao> sessoes = new ArrayList<>();
 
-    /**
-     * Lista de filmes disponíveis nas sessões.
-     */
-    private List<Filme> filmes = new ArrayList<>();
-
-    /**
-     * Lista de horários das sessões.
-     */
-    private List<LocalDate> horario;
-
-    /**
-     * Scanner utilizado para entrada de dados pelo usuário.
-     */
-    private Scanner scanner;
-
-    /**
-     * Construtor que inicializa a classe Sessao com um novo scanner para entrada de dados.
-     */
-    public Sessao() {
-        this.scanner = new Scanner(System.in);
+    public Filme getFilme()
+    {
+        return filme;
     }
 
-    /**
-     * Retorna as salas disponíveis para as sessões.
-     *
-     * @return Um array de objetos Salas.
-     */
-    public Salas[] getSala() {
+    public void setFilme(Filme filme)
+    {
+        this.filme = filme;
+    }
+
+    public Sala getSalas()
+    {
         return salas;
     }
 
-    /**
-     * Retorna a lista de filmes disponíveis para as sessões.
-     *
-     * @return Uma lista de objetos Filme.
-     */
-    public List<Filme> getFilmes() {
-        return filmes;
+    public void setSalas(Sala salas)
+    {
+        this.salas = salas;
     }
 
-    /**
-     * Define a lista de filmes disponíveis para as sessões.
-     *
-     * @param filmes A nova lista de filmes.
-     */
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
+    public static List<Sessao> getSessoes()
+    {
+        return sessoes;
     }
 
-    /**
-     * Retorna a lista de horários das sessões.
-     *
-     * @return Uma lista de datas representando os horários das sessões.
-     */
-    public List<LocalDate> getHorario() {
-        return horario;
+    public static void setSessoes(List<Sessao> sessoes)
+    {
+        Sessao.sessoes = sessoes;
     }
 
-    /**
-     * Define a lista de horários das sessões.
-     *
-     * @param horario A nova lista de horários.
-     */
-    public void setHorario(List<LocalDate> horario) {
-        this.horario = horario;
+    public int getEspectadores()
+    {
+        return espectadores;
     }
 
+    public void setEspectadores(int espectadores)
+    {
+        this.espectadores = espectadores;
+    }
+
+    public Sessao(Filme filme, Sala salas, LocalDateTime horarioInicio)
+    {
+        this.filme = filme;
+        this.salas = salas;
+        this.horarioInicio = horarioInicio;
+        this.horarioTermino = calcularHorarioTermino();
+        this.espectadores = 0;
+    }
+
+    private LocalDateTime calcularHorarioTermino()
+    {
+        return horarioInicio.plus(filme.getDuracao());
+    }
+
+    public LocalDateTime getHorarioInicio()
+    {
+        return horarioInicio;
+    }
+
+    public LocalDateTime getHorarioTermino()
+    {
+        return horarioTermino;
+    }
+
+    public static void criarSessao(Filme filme, Sala salas, LocalDateTime horarioInicio)
+    {
+        Sessao sessao = new Sessao(filme, salas, horarioInicio);
+        sessoes.add(sessao);
+    }
+
+    public static List<Sessao> listarSessoes()
+    {
+        return sessoes;
+    }
+
+    public void registrarEspectadores(int quantidade)
+    {
+        this.espectadores += quantidade ;
+        filme.adicionarEspectadores(quantidade);
+    }
+
+    @Override
+    public String toString()
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return "Sessao{"
+                + "filme=" + filme.getTitulo()
+                + ", sala=" + salas.getNumeroSala()
+                + ", horarioInicio=" + horarioInicio.format(formatter)
+                + ", horarioTermino=" + horarioTermino.format(formatter)
+                + '}';
+    }
 }

@@ -47,7 +47,8 @@ public class Cliente extends Pessoa{
     
     public static int CONTADOR_CLIENTE;
     
-    Scanner sc = new Scanner(System.in);
+    // Marcar o Scanner como transient para evitar problemas de serialização
+    private transient Scanner sc = new Scanner(System.in);
     
     /**
      * Construtor com informações do cliente.
@@ -138,7 +139,7 @@ public class Cliente extends Pessoa{
         setCpf(cpf);
         
         System.out.println("Qual a sua data de nascimento (formato dd/MM/yyyy): ");
-        String aniversarioTexto = sc.nextLine();
+        String aniversarioTexto= sc.nextLine();
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate aniversario = LocalDate.parse(aniversarioTexto, formatoData);
         setAniversario(aniversario);

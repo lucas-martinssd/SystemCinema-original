@@ -4,129 +4,171 @@
  */
 package com.mycompany.systemcinema;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * Classe para armazenar e detalhar o Estoque.
- * <p>
- * Esta classe é usada para armazenar características de um Produto, cadastrar e remover um produto, além de listar os produtos.
- * </p>
- *
- * @author enzov
- * @version 1.0
+ * A classe Estoque gerencia o inventário de produtos em um cinema, incluindo
+ * pipoca, guloseimas e bebidas.
  */
-public class Estoque 
+public class Estoque
 {
-    /**
-     * Lista para armazenar os produtos.
-     */
-    private List<Produto> produto;
-    
-    public List<Produto> getProduto(){
-        return produto;
-    }
-    
-    /**
-     * Quantidade de pipoca no estoque.
-     */
+
+    private List<Produto> produtos;
     private int quantidadePipoca;
-    
-    /**
-     * Quantidade de bebidas no estoque.
-     */
+    private int quantidadeGuloseimas;
     private int quantidadeBebidas;
     
-    /**
-     * Quantidade de guloseimas no estoque.
-     */
-    private int quantidadeGuloseimas;
-    
-    Scanner sc = new Scanner(System.in);
-    
-    /**
-     * Construtor padrão que inicializa a lista de produtos.
-     */
-    public Estoque ()
+            /**
+             * Construtor padrão que inicializa o estoque com listas vazias e
+             * contadores zerados.
+             */
+
+    public Estoque()
     {
-        this.produto = new ArrayList<>();
+        this.produtos = new ArrayList<>();
+        this.quantidadePipoca = 0;
+        this.quantidadeGuloseimas = 0;
+        this.quantidadeBebidas = 0;
     }
 
     /**
-     * Construtor que inicializa o estoque com quantidades específicas de pipoca, bebidas e guloseimas.
-     * 
-     * @param quantidadePipoca A quantidade inicial de pipoca no estoque.
-     * @param quantidadeBebidas A quantidade inicial de bebidas no estoque.
-     * @param quantidadeGuloseimas A quantidade inicial de guloseimas no estoque.
+     * Adiciona um produto ao estoque e atualiza os contadores de quantidade com
+     * base no tipo do produto.
+     *
+     * @param nome
+     * @param validade
+     * @return
      */
-    public Estoque(int quantidadePipoca, int quantidadeBebidas, int quantidadeGuloseimas) {
-        this.quantidadePipoca = quantidadePipoca;
-        this.quantidadeBebidas = quantidadeBebidas;
-        this.quantidadeGuloseimas = quantidadeGuloseimas;
-    }
-    
-    /**
-     * Método para cadastrar um novo produto no estoque.
-     * 
-     * @param nome O nome do produto.
-     * @param validadeStr A data de validade do produto no formato "dd/MM/yyyy".
-     */
-    public void cadastrarProduto(String nome, String validadeStr)
-    {   
-        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate validade = LocalDate.parse(validadeStr, formatoData);
-        this.produto.add(new Produto(nome, validade));
-    }
-    
-    /**
-     * Método para remover um produto do estoque.
-     * 
-     * @return True se o produto foi removido com sucesso, False caso contrário.
-     */
-    public boolean removerProduto()
-    {   
-        System.out.println("Qual o nome do produto que deseja remover? ");
-        String nome = sc.nextLine();
-        return produto.removeIf(x -> x.getNome().equals(nome));
-    }
-    
-    /**
-     * Método para listar todos os produtos do estoque.
-     */
-    public void listarProdutos()
+    public Produto cadastrarProduto(String nome, LocalDate validade, double preco)
     {
-        for(Produto list : produto)
+        Produto novoProduto = new Produto(nome, validade, preco);
+        this.produtos.add(novoProduto);
+        if (novoProduto.getNome().toLowerCase().contains("pipoca"))
         {
-            System.out.println("\nProduto: " + list.getNome());
+            quantidadePipoca++;
+        }
+        else if (novoProduto.getNome().toLowerCase().contains("guloseima"))
+        {
+            quantidadeGuloseimas++;
+        }
+        else if (novoProduto.getNome().toLowerCase().contains("bebida"))
+        {
+            quantidadeBebidas++;
+        }
+        Produto.setN_INSTANCIAS(+1);
+        return novoProduto;
+    }
+
+    /**
+     * Remove um produto do estoque pelo nome e atualiza os contadores de
+     * quantidade com base no tipo do produto.
+     *
+     * @param nome O nome do produto a ser removido.
+     */
+    public void removerProduto(String nome)
+    {
+        Iterator<Produto> iterator = produtos.iterator();// Cria um iterator p percorrer a lista de produtos
+        while (iterator.hasNext()) // continua a percorrer enquanto houver mais um elemnto na lista
+        {
+            Produto produto = iterator.next(); // chega ao proximo produto da lista
+            
+            if (produto.getNome().equalsIgnoreCase(nome))
+            {
+                iterator.remove();
+                if (produto.getNome().toLowerCase().contains("pipoca"))
+                {
+                    quantidadePipoca--;
+                }
+                else if (produto.getNome().toLowerCase().contains("guloseima"))
+                {
+                    quantidadeGuloseimas--;
+                }
+                else if (produto.getNome().toLowerCase().contains("bebida"))
+                {
+                    quantidadeBebidas--;
+                }
+            }
         }
     }
 
-    // Getters e Setters
-    
-    public int getQuantidadePipoca() {
-        return quantidadePipoca;
+    /**
+     * Retorna uma lista de todos os produtos disponíveis no estoque.
+     *
+     * @return Uma lista de produtos.
+     */
+    public List<Produto> listarProdutosDisponiveis()
+    {
+        return new ArrayList<>(produtos);
     }
 
-    public int getQuantidadeBebidas() {
-        return quantidadeBebidas;
+    /**
+     * Verifica a validade dos produtos no estoque, avisa sobre quantos dias
+     * faltam para o produto vencer e remove os produtos que estão fora da
+     * validade.
+     */
+    /**
+     * Verifica a validade dos produtos no estoque e remove os que estão vencidos.
+     */
+    public void verificarValidade() {
+        Iterator<Produto> iterator = produtos.iterator();
+        while (iterator.hasNext()) {
+            Produto produto = iterator.next();
+            if (produto.getValidade().isBefore(LocalDate.now())) {
+                iterator.remove();
+                System.out.println("Produto removido por validade vencida: " + produto.getNome());
+            }
+        }
+    }
+
+    /**
+     * Get e Set das variaveis da classe Estoque
+     * @return 
+     */
+    
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public int getQuantidadePipoca() {
+        return quantidadePipoca;
     }
 
     public int getQuantidadeGuloseimas() {
         return quantidadeGuloseimas;
     }
 
+    public int getQuantidadeBebidas() {
+        return quantidadeBebidas;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
     public void setQuantidadePipoca(int quantidadePipoca) {
         this.quantidadePipoca = quantidadePipoca;
+    }
+
+    public void setQuantidadeGuloseimas(int quantidadeGuloseimas) {
+        this.quantidadeGuloseimas = quantidadeGuloseimas;
     }
 
     public void setQuantidadeBebidas(int quantidadeBebidas) {
         this.quantidadeBebidas = quantidadeBebidas;
     }
-
-    public void setQuantidadeGuloseimas(int quantidadeGuloseimas) {
-        this.quantidadeGuloseimas = quantidadeGuloseimas;
+    
+    @Override
+    public String toString()
+    {
+        return "Estoque{"
+                + "produtos=" + produtos
+                + ", quantidadePipoca=" + quantidadePipoca
+                + ", quantidadeGuloseimas=" + quantidadeGuloseimas
+                + ", quantidadeBebidas=" + quantidadeBebidas
+                + '}';
     }
 }

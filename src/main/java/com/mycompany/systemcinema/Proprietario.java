@@ -11,14 +11,16 @@ import java.util.Scanner;
 /**
  * Classe para representar um Proprietário do cinema.
  * <p>
- * Esta classe estende a classe Funcionario e adiciona funcionalidades específicas de um proprietário,
- * como realizar login, registro e compra de estoque.
+ * Esta classe estende a classe Funcionario e adiciona funcionalidades
+ * específicas de um proprietário, como realizar login, registro e compra de
+ * estoque.
  * </p>
  *
  * @author Lucas
  * @version 1.0
  */
-public class Proprietario extends Funcionario {
+public class Proprietario extends Funcionario
+{
 
     private String senhaProprietarioOriginal;
     private String loginProprietarioOriginal;
@@ -31,14 +33,15 @@ public class Proprietario extends Funcionario {
      *
      * @param senhaProprietarioOriginal A senha original do proprietário.
      * @param loginProprietarioOriginal O login original do proprietário.
-     * @param name                      O nome do proprietário.
-     * @param sobrenome                 O sobrenome do proprietário.
-     * @param endereco                  O endereço do proprietário.
-     * @param telefone                  O telefone do proprietário.
-     * @param cpf                       O CPF do proprietário.
-     * @param aniversario               A data de nascimento do proprietário.
+     * @param name O nome do proprietário.
+     * @param sobrenome O sobrenome do proprietário.
+     * @param endereco O endereço do proprietário.
+     * @param telefone O telefone do proprietário.
+     * @param cpf O CPF do proprietário.
+     * @param aniversario A data de nascimento do proprietário.
      */
-    public Proprietario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaProprietarioOriginal, String loginProprietarioOriginal) {
+    public Proprietario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaProprietarioOriginal, String loginProprietarioOriginal)
+    {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
         this.senhaProprietarioOriginal = senhaProprietarioOriginal;
         this.loginProprietarioOriginal = loginProprietarioOriginal;
@@ -48,18 +51,23 @@ public class Proprietario extends Funcionario {
     /**
      * Método para realizar o login do proprietário.
      */
-    public void proprietarioRealizarLogin() {
+    public void proprietarioRealizarLogin()
+    {
         boolean loginValido = false;
-        while (!loginValido) {
+        while (!loginValido)
+        {
             System.out.println("Informe o seu login: ");
             String loginProprietario = sc.nextLine();
             System.out.println("Informe a sua senha: ");
             String senhaProprietario = sc.nextLine();
 
-            if (loginProprietario.equals(loginProprietarioOriginal) && senhaProprietario.equals(senhaProprietarioOriginal)) {
+            if (loginProprietario.equals(loginProprietarioOriginal) && senhaProprietario.equals(senhaProprietarioOriginal))
+            {
                 loginValido = true;
                 System.out.println("Bem vindo ao CineDjamas proprietario");
-            } else {
+            }
+            else
+            {
                 System.out.println("Login ou senha incorretos. Tente novamente");
             }
         }
@@ -68,7 +76,8 @@ public class Proprietario extends Funcionario {
     /**
      * Método para registrar um novo proprietário.
      */
-    public void registroProprietario() {
+    public void registroProprietario()
+    {
         System.out.println("Qual o seu nome: ");
         String name = sc.nextLine();
         setName(name);
@@ -107,7 +116,8 @@ public class Proprietario extends Funcionario {
      *
      * @param estoque O estoque onde serão adicionados os produtos.
      */
-    public void compraDeEstoque(Estoque estoque) {
+    public void compraDeEstoque(Estoque estoque)
+    {
         System.out.println("Qual produto você deseja comprar: pipoca, bebidas ou guloseimas? ");
         String produtoComprado = sc.nextLine();
 
@@ -115,36 +125,51 @@ public class Proprietario extends Funcionario {
         int quantidadeComprado = sc.nextInt();
         sc.nextLine();
 
-        if (produtoComprado.equals("pipoca")) {
+        if (produtoComprado.equals("pipoca"))
+        {
             int quantidadePipoca = estoque.getQuantidadePipoca();
             quantidadePipoca = quantidadePipoca + quantidadeComprado;
             estoque.setQuantidadePipoca(quantidadePipoca);
             System.out.println("Informe a validade da pipoca: ");
-            String validadePipoca = sc.nextLine();
-            estoque.cadastrarProduto("Pipoca", validadePipoca);
-        } else if (produtoComprado.equals("bebidas")) {
+            String entrada = sc.nextLine();
+            LocalDate validadePipoca = LocalDate.parse(entrada);
+            System.out.println("Informe o valor da pipoca: ");
+            int preco = Integer.parseInt(sc.nextLine());
+            estoque.cadastrarProduto("Pipoca", validadePipoca, preco);
+        }
+        else if (produtoComprado.equals("bebidas"))
+        {
             int quantidadeBebidas = estoque.getQuantidadeBebidas();
             quantidadeBebidas = quantidadeBebidas + quantidadeComprado;
             estoque.setQuantidadeBebidas(quantidadeBebidas);
-            String validadeBebidas = sc.nextLine();
-            estoque.cadastrarProduto("Pipoca", validadeBebidas);
-        } else if (produtoComprado.equals("guloseimas")) {
+            System.out.println("Informe a validade da bebida: ");
+            String entrada = sc.nextLine();
+            LocalDate validadebebidas = LocalDate.parse(entrada);
+            System.out.println("Informe o valor da bebida: ");
+            int preco = Integer.parseInt(sc.nextLine());
+            estoque.cadastrarProduto("Pipoca", validadebebidas, preco);
+        }
+        else if (produtoComprado.equals("guloseimas"))
+        {
             int quantidadeGuloseimas = estoque.getQuantidadeGuloseimas();
             quantidadeGuloseimas = quantidadeGuloseimas + quantidadeComprado;
             estoque.setQuantidadeGuloseimas(quantidadeGuloseimas);
-            String validadeGuloseimas = sc.nextLine();
-            estoque.cadastrarProduto("Pipoca", validadeGuloseimas);
+            System.out.println("Informe a validade da guloseima: ");
+            String entrada = sc.nextLine();
+            LocalDate validadeguloseima = LocalDate.parse(entrada);
+            System.out.println("Informe o valor da guloseima: ");
+            int preco = Integer.parseInt(sc.nextLine());
+            estoque.cadastrarProduto("Pipoca", validadeguloseima, preco);
         }
     }
-    
-    
 
     /**
      * Obtém a senha original do proprietário.
      *
      * @return A senha original do proprietário.
      */
-    public String getSenhaProprietarioOriginal() {
+    public String getSenhaProprietarioOriginal()
+    {
         return senhaProprietarioOriginal;
     }
 
@@ -153,7 +178,8 @@ public class Proprietario extends Funcionario {
      *
      * @return O login original do proprietário.
      */
-    public String getLoginProprietarioOriginal() {
+    public String getLoginProprietarioOriginal()
+    {
         return loginProprietarioOriginal;
     }
 
@@ -162,7 +188,8 @@ public class Proprietario extends Funcionario {
      *
      * @param senhaProprietarioOriginal A senha original do proprietário.
      */
-    public void setSenhaProprietarioOriginal(String senhaProprietarioOriginal) {
+    public void setSenhaProprietarioOriginal(String senhaProprietarioOriginal)
+    {
         this.senhaProprietarioOriginal = senhaProprietarioOriginal;
     }
 
@@ -171,22 +198,24 @@ public class Proprietario extends Funcionario {
      *
      * @param loginProprietarioOriginal O login original do proprietário.
      */
-    public void setLoginProprietarioOriginal(String loginProprietarioOriginal) {
+    public void setLoginProprietarioOriginal(String loginProprietarioOriginal)
+    {
         this.loginProprietarioOriginal = loginProprietarioOriginal;
     }
 
     @Override
-    public String toString() {
-        return "Proprietario{" +
-                "nome = " + getName() +
-                ", sobrenome = " + getSobrenome() +
-                ", endereço = " + getEndereco() +
-                ", telefone = " + getTelefone() +
-                ", CPF = " + getCpf() +
-                ", aniversario = " + getAniversario() +
-                ", login = " + getLoginProprietarioOriginal() +
-                ", senha = " + getSenhaProprietarioOriginal() +
-                '}';
+    public String toString()
+    {
+        return "Proprietario{"
+                + "nome = " + getName()
+                + ", sobrenome = " + getSobrenome()
+                + ", endereço = " + getEndereco()
+                + ", telefone = " + getTelefone()
+                + ", CPF = " + getCpf()
+                + ", aniversario = " + getAniversario()
+                + ", login = " + getLoginProprietarioOriginal()
+                + ", senha = " + getSenhaProprietarioOriginal()
+                + '}';
     }
 
 }

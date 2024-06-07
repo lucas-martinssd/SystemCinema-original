@@ -111,12 +111,19 @@ public class SystemCinema {
         }
         }
         */
-        Json json = new Json();
+        
+        ///Questao 14
+        
+        //Cliente
+        Repositorys json = new Repositorys();
         GestaoDeClientes gestaoClientes = new GestaoDeClientes();
-            gestaoClientes.cadastroDeCliente();
             gestaoClientes.cadastroDeCliente();
         json.salvarClientes(gestaoClientes.getListaDeClientes());
         
+        //Funcionario
+        GestaoDeFuncionarios gestaoFuncionarios = new GestaoDeFuncionarios();
+            gestaoFuncionarios.cadastroDeFuncionario();
+        json.salvarFuncionarios(gestaoFuncionarios.getListaDeFuncionarios());
     }
 }
 

@@ -14,7 +14,7 @@ import java.time.LocalDate;
  *
  * @author enzov
  */
-public class Pessoa {
+public abstract class Pessoa {
     private String name;
     private String sobrenome;
     private String endereco;

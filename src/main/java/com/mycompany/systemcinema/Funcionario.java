@@ -30,7 +30,8 @@ public class Funcionario extends Pessoa {
      */
     private String loginFuncionarioOriginal;
 
-    Scanner sc = new Scanner(System.in);
+    // Marcar o Scanner como transient para evitar problemas de serialização
+    private transient Scanner sc = new Scanner(System.in);
 
     /**
      * Construtor da classe Funcionario com informações do funcionário.

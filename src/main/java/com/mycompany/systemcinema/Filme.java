@@ -5,112 +5,103 @@
 package com.mycompany.systemcinema;
 
 import java.time.Duration;
+import java.util.Comparator;
+
 
 /**
- * Classe para representar atributos de um Filme.
- * <p>
- * Esta classe é usada para armazenar características de um Filme como nome, gênero e duração.
- * </p>
  *
  * @author enzov
- * @version 1.0
  */
+//interface Comparator é parametrizada para comparar objetos do tipo Filme
 public class Filme 
-{   
-    /**
-     * O nome do filme.
-     */
-    private String titulo;
-    
-    /**
-     * O gênero do Filme.
-     */
-    private String genero;
-    
-    /**
-     * A duração do Filme.
-     */
-    private Duration duracao;
+{
 
-    /**
-     * Obtém o título do filme.
-     * 
-     * @return O título do filme.
-     */
-    public String getTitulo() {
+    private String titulo;
+    private String genero;
+    private Duration duracao;
+    private int totalEspectadores;
+    private long tempoTotalExibicao;
+
+    public String getTitulo()
+    {
         return titulo;
     }
 
-    /**
-     * Define o título do filme.
-     * 
-     * @param titulo O título do filme.
-     */
-    public void setTitulo(String titulo) {
+    public void setTitulo(String titulo)
+    {
         this.titulo = titulo;
     }
 
-    /**
-     * Obtém o gênero do filme.
-     * 
-     * @return O gênero do filme.
-     */
-    public String getGenero() {
+    public String getGenero()
+    {
         return genero;
     }
 
-    /**
-     * Define o gênero do filme.
-     * 
-     * @param genero O gênero do filme.
-     */
-    public void setGenero(String genero) {
+    public void setGenero(String genero)
+    {
         this.genero = genero;
     }
 
-    /**
-     * Obtém a duração do filme.
-     * 
-     * @return A duração do filme.
-     */
-    public Duration getDuracao() {
+    public Duration getDuracao()
+    {
         return duracao;
     }
 
-    /**
-     * Define a duração do filme.
-     * 
-     * @param duracao A duração do filme.
-     */
-    public void setDuracao(Duration duracao) {
+    public void setDuracao(Duration duracao)
+    {
         this.duracao = duracao;
     }
-    
-    /**
-     * Construtor padrão da classe Filme.
-     */
-    public Filme(){}
 
-    /**
-     * Constrói um novo filme com título, gênero e duração.
-     *
-     * @param titulo O título do filme.
-     * @param genero O gênero do filme.
-     * @param duracao A duração do filme.
-     */
-    public Filme(String titulo, String genero, Duration duracao) {
+    public int getTotalEspectadores()
+    {
+        return totalEspectadores;
+    }
+
+    public void setTotalEspectadores(int totalEspectadores)
+    {
+        this.totalEspectadores = totalEspectadores;
+    }
+
+    public long getTempoTotalExibicao()
+    {
+        return tempoTotalExibicao;
+    }
+
+    public void setTempoTotalExibicao(long tempoTotalExibicao)
+    {
+        this.tempoTotalExibicao = tempoTotalExibicao;
+    }
+
+    public Filme()
+    {
+    }
+
+    public Filme(String titulo, String genero, Duration duracao)
+    {
         this.titulo = titulo;
         this.genero = genero;
         this.duracao = duracao;
+        this.totalEspectadores = 0;
+        this.tempoTotalExibicao = 0;
     }
+
+    public void adicionarEspectadores(int quantidade)
+    {
+        this.totalEspectadores += quantidade;
+        this.tempoTotalExibicao += quantidade * duracao.toMinutes();
+    }
+
     
-    /**
-     * Sobrescreve o método toString para retornar o título, gênero e duração do filme.
-     *
-     * @return Uma string que representa o filme no formato "Título, Gênero, Duração".
-     */
+
+    
     @Override
-    public String toString() {
-        return titulo + ", " + genero + ", " + duracao;
+    public String toString()
+    {
+        return "Filme{"
+                + "titulo='" + titulo + '\''
+                + ", genero='" + genero + '\''
+                + ", duracao=" + duracao
+                + '}';
     }
+
 }
