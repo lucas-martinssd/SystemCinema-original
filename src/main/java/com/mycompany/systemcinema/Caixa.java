@@ -157,13 +157,14 @@ public class Caixa
      * Efetua o pagamento da compra, registrando os espectadores e adicionando a
      * venda às listas diárias e mensais.
      */
-    public void efetuarPagamento()
+    public void efetuarPagamento(Cliente cliente)
     {
         double totalCompra = valorTotalCompra();
         System.out.println("Pagamento efetuado no valor de: R$" + totalCompra);
         carrinho.getSessao().registrarEspectadores(carrinho.getQuantidadeIngressos());
         vendasDiarias.add(new Venda(LocalDate.now(), totalCompra, valorTotalIngressos(), valorTotalProdutos()));
         vendasMensais.add(new Venda(LocalDate.now(), totalCompra, valorTotalIngressos(), valorTotalProdutos()));
+        cliente.adicionarVenda(new Venda(LocalDate.now(), totalCompra, valorTotalIngressos(), valorTotalProdutos()));
     }
 
     /**

@@ -6,6 +6,9 @@ package com.mycompany.systemcinema;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -45,7 +48,15 @@ public class Cliente extends Pessoa{
      */
     private String senhaCliente;
     
-    public static int CONTADOR_CLIENTE;
+    /**
+     * Lista de vendas.
+     */
+    private List<Venda> vendas;
+    
+    /**
+     * Variavel para contabilizar os clientes.
+     */
+    private static int contadorClientePrivado;
     
     // Marcar o Scanner como transient para evitar problemas de serialização
     private transient Scanner sc = new Scanner(System.in);
@@ -73,7 +84,8 @@ public class Cliente extends Pessoa{
         this.loginClienteOriginal = loginClienteOriginal;
         this.senhaClienteOriginal = senhaClienteOriginal;
         setCategoria("Cliente");
-        CONTADOR_CLIENTE++;
+        this.vendas = new ArrayList<>();
+        contadorClientePrivado++;
     }
     
     /**
@@ -88,6 +100,7 @@ public class Cliente extends Pessoa{
      */
     public Cliente(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
+        contadorClientePrivado++;
     }
     
     /**
@@ -151,6 +164,18 @@ public class Cliente extends Pessoa{
         senhaClienteOriginal = sc.nextLine();
     }
     
+    /**
+     * Adiciona venda ao um cliente
+     * @param venda 
+     */
+    public void adicionarVenda(Venda venda){
+        this.vendas.add(venda);
+    }
+    
+    public List<Venda> getVendas(){
+        return vendas;
+    }
+    
      public String getPreferenciaDeFilme() {
         return preferenciaDeFilme;
     }
@@ -175,6 +200,10 @@ public class Cliente extends Pessoa{
         return senhaCliente;
     }
 
+    public static int getContadorClientePrivado() {
+        return contadorClientePrivado;
+    }
+
     public void setPreferenciaDeFilme(String preferenciaDeFilme) {
         this.preferenciaDeFilme = preferenciaDeFilme;
     }
@@ -197,6 +226,10 @@ public class Cliente extends Pessoa{
 
     public void setSenhaCliente(String senhaCliente) {
         this.senhaCliente = senhaCliente;
+    }
+
+    public static void setContadorClientePrivado(int contadorClientePrivado) {
+        Cliente.contadorClientePrivado = contadorClientePrivado;
     }
     
     @Override

@@ -238,4 +238,12 @@ public class Sistema
             }
         }
     }
+    
+    public int getContadorClientePrivado() {
+        return Cliente.getContadorClientePrivado();
+    }
+
+    public void setContadorClientePrivado(int contador) {
+        Cliente.setContadorClientePrivado(contador);
+    }
 }

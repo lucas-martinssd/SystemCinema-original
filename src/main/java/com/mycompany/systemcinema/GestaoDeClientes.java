@@ -7,6 +7,7 @@ package com.mycompany.systemcinema;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ import java.util.Scanner;
  * @author Lucas
  * @version 1.0
  */
-public class GestaoDeClientes {
+public class GestaoDeClientes implements Iterable<Cliente> {
 
     public List<Cliente> listaDeClientes;
     
@@ -29,6 +30,20 @@ public class GestaoDeClientes {
     
     public GestaoDeClientes(){
         listaDeClientes = new ArrayList<>();
+    }
+    
+    /**
+     * Busca um cliente especifico.
+     * @param cpf
+     * @return 
+     */
+    public Cliente buscarClientePorCpf(String cpf){
+        for (Cliente cliente : listaDeClientes){
+            if (cliente.getCpf().equals(cpf)){
+                return cliente;
+            }
+        }
+        return null;
     }
     
     /**
@@ -153,5 +168,20 @@ public class GestaoDeClientes {
         } else {
             System.out.println("Cliente com CPF " + cpf + " não encontrado.");
         }
+    }
+    
+    public void extratoCliente(){
+        System.out.println("Informe o CPF do cliente a ser removido: ");
+        String cpf = sc.nextLine();
+    }
+    
+    /**
+     * Método para retornar um iterator da lista de clientes.
+     * 
+     * @return Um iterator para a lista de clientes.
+     */
+    @Override
+    public Iterator<Cliente> iterator() {
+        return new ClienteIterator(listaDeClientes);
     }
 }
