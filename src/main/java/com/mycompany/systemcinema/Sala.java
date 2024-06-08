@@ -40,7 +40,7 @@ public class Sala
         this.filme = filme;
     }
 
-    public Sala (int numeroSala, Filme filme)
+    public Sala(int numeroSala, Filme filme)
     {
         this.numeroSala = numeroSala;
         this.filme = filme;

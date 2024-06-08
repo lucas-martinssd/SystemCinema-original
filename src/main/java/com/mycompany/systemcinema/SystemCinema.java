@@ -23,56 +23,45 @@ public class SystemCinema {
         /**
         ///Questão 3
         {
-        //Pessoa
-        {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Pessoa pessoa = new Pessoa("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa);
-        System.out.println(pessoa.toString());
-        }
-        
-        //Cliente
-        {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Cliente cliente = new Cliente("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "Batman", "Ação", "lucas", "1234");
-        System.out.println(cliente.toString());
-        }
-        
-        //Funcionario
-        {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Funcionario funcionario = new Funcionario("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "lucas", "1234");
-        System.out.println(funcionario.toString());
-        }
-        
-        //Proprietario
-        {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Proprietario proprietario = new Proprietario("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "lucas", "1234");
-        System.out.println(proprietario.toString());
-        }
+        Todas as classes com método toString()
         }
     
         ///Questão 4
         {
         //Cliente
         {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Cliente cliente = new Cliente("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "Batman", "Ação", "lucas", "1234");
-        System.out.println(cliente.toString());
+        public Cliente(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, 
+            String preferenciaDeFilme, String preferenciaDeGenero, String loginClienteOriginal,
+            String senhaClienteOriginal) {
+            super(name, sobrenome, endereco, telefone, cpf, aniversario);
+            this.preferenciaDeFilme = preferenciaDeFilme;
+            this.preferenciaDeGenero = preferenciaDeGenero;
+            this.loginClienteOriginal = loginClienteOriginal;
+            this.senhaClienteOriginal = senhaClienteOriginal;
+            setCategoria("Cliente");
+            this.vendas = new ArrayList<>();
+            contadorClientePrivado++;
+        }
         }
         
         //Funcionario
         {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Funcionario funcionario = new Funcionario("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "lucas", "1234");
-        System.out.println(funcionario.toString());
+        public Funcionario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaFuncionarioOriginal, String loginFuncionarioOriginal) {
+            super(name, sobrenome, endereco, telefone, cpf, aniversario);
+            this.senhaFuncionarioOriginal = senhaFuncionarioOriginal;
+            this.loginFuncionarioOriginal = loginFuncionarioOriginal;
+            setCategoria("Funcionario");
+        }
         }
         
         //Proprietario
         {
-        LocalDate dataPessoa = LocalDate.of(2001, 11, 07);
-        Proprietario proprietario = new Proprietario("Lucas", "Martins", "Diamantina", "(31)98448-9509", "155.150.566-55", dataPessoa, "lucas", "1234");
-        System.out.println(proprietario.toString());
+        public Proprietario(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario, String senhaProprietarioOriginal, String loginProprietarioOriginal){
+            super(name, sobrenome, endereco, telefone, cpf, aniversario);
+            this.senhaProprietarioOriginal = senhaProprietarioOriginal;
+            this.loginProprietarioOriginal = loginProprietarioOriginal;
+            setCategoria("Proprietario");
+        }
         }
         }
 
@@ -113,6 +102,28 @@ public class SystemCinema {
             System.out.println(cliente);
         }
         }
+        
+        ///Questao 10
+        {
+        GestaoDeClientes gestaoDeClientes = new GestaoDeClientes();
+        Caixa caixa = new Caixa(new Carrinho(new Estoque()));
+
+        gestaoDeClientes.cadastroDeCliente();
+
+        System.out.println("Informe o CPF do cliente para a venda: ");
+        Scanner scanner = new Scanner(System.in);
+        String cpf = scanner.nextLine();
+
+        Cliente cliente = gestaoDeClientes.buscarClientePorCpf(cpf);
+        if (cliente != null) {
+            caixa.efetuarPagamento(cliente);
+        } else {
+            System.out.println("Cliente não encontrado.");
+        }
+
+        // Exibir vendas do cliente
+        System.out.println("Vendas do cliente: " + cliente.getVendas());
+        } 
         
         ///Questao 11
         {
@@ -179,7 +190,6 @@ public class SystemCinema {
         
             public Cliente(String name, String sobrenome, String endereco, String telefone, String cpf, LocalDate aniversario) {
                 super(name, sobrenome, endereco, telefone, cpf, aniversario);
-                // Incrementar contador privado
                 contadorClienteProtected++;
             }
         
@@ -207,30 +217,15 @@ public class SystemCinema {
         
         }
         
-        ///Questao 10
+        ///Questao 12
         {
-        GestaoDeClientes gestaoDeClientes = new GestaoDeClientes();
-        Caixa caixa = new Caixa(new Carrinho(new Estoque()));
-
-        // Cadastro de clientes (para teste)
-        gestaoDeClientes.cadastroDeCliente();
-
-        // Simulando o pagamento
-        System.out.println("Informe o CPF do cliente para a venda: ");
-        Scanner scanner = new Scanner(System.in);
-        String cpf = scanner.nextLine();
-
-        Cliente cliente = gestaoDeClientes.buscarClientePorCpf(cpf);
-        if (cliente != null) {
-            caixa.efetuarPagamento(cliente);
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
-
-        // Exibir vendas do cliente
-        System.out.println("Vendas do cliente: " + cliente.getVendas());
-        }
+        Cliente cliente1 = new Cliente("Lucas", "Martins", "Diamantina", "123456789", "11122233344", LocalDate.of(2001, 11, 07), "Ação", "Drama", "lucas", "123");
+        Cliente cliente2 = new Cliente("Enzo", "Veloso", "Diamantina", "987654321", "55566677788", LocalDate.of(2001, 12, 5), "Comédia", "Romance", "enzo", "123");
         
+        Sistema sistema = new Sistema();
+        System.out.println("Contador de Clientes: " + sistema.getContadorClientePrivado());
+        }
+         
         ///Questao 14
         {
         //Cliente
@@ -245,15 +240,6 @@ public class SystemCinema {
         json.salvarFuncionarios(gestaoFuncionarios.getListaDeFuncionarios());
         }
         
-        ///Questao 12
-        {
-        Cliente cliente1 = new Cliente("Lucas", "Martins", "Diamantina", "123456789", "11122233344", LocalDate.of(2001, 11, 07), "Ação", "Drama", "lucas", "123");
-        Cliente cliente2 = new Cliente("Enzo", "Veloso", "Diamantina", "987654321", "55566677788", LocalDate.of(2001, 12, 5), "Comédia", "Romance", "enzo", "123");
-        
-        Sistema sistema = new Sistema();
-        System.out.println("Contador de Clientes: " + sistema.getContadorClientePrivado());
-        }
-
         ///Questao 15
         {
         GestaoDeClientes gestaoClientes = new GestaoDeClientes();
@@ -279,9 +265,16 @@ public class SystemCinema {
                 + "O loop percorre os elementos que nao foram visitados, verificando pelo hasNext(), e com o next() vamos obtendo o próximo"
                 + "elemento. E por fim é imprimido o método toString() de cada cliente.";
         
+        //foreach:
+        //for (Cliente cliente : gestaoClientes.listaDeClientes) {
+        //    System.out.println(cliente.toString());
+        //}
+        //O foreach também percorre uma coleção de elementos de forma sequencial, porem de forma mais simples mas com menos controle sobre as
+        // iterações.
+         
         }
-         */
         
+        */
     }    
 }
     

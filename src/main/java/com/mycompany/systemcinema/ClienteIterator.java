@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Lucas
  */
-public class ClienteIterator  implements Iterator<Cliente>{
+public class ClienteIterator implements Iterator<Cliente>{
     private int indiceAtual = 0;
     private List<Cliente> clientes;
 
