@@ -103,6 +103,8 @@ public class Cliente extends Pessoa{
         contadorClientePrivado++;
     }
     
+    public void Cliente(){}
+    
     /**
      * Solicita o login e a senha do cliente para ele entrar no sistema. 
      * Se a senha e login forem corretos o cliente entrará no sistema, 

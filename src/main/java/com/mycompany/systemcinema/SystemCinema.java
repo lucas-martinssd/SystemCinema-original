@@ -5,12 +5,6 @@
 package com.mycompany.systemcinema;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDate;
-import static java.util.Collections.list;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -20,7 +14,17 @@ public class SystemCinema {
     
     public static void main(String[] args) throws IOException {
         
-        /**
+        /*
+        ///Questão 1
+        {
+        Diagrama de Classes feito.
+        }
+        
+        ///Questão 2
+        {
+        Encapsulamento feito para apenas Funcionario e Proprietario interagirem com o sistema.
+        }
+        
         ///Questão 3
         {
         Todas as classes com método toString()
@@ -65,6 +69,18 @@ public class SystemCinema {
         }
         }
 
+        //Questão 5
+        
+        Estoque estoque = new Estoque();
+        
+        Caixa.inicializarBalcoes(estoque);
+        Caixa[] balcoes = Caixa.getBalcoes();
+
+        for (int i = 0; i < balcoes.length; i++)
+        {
+            System.out.println("Balcao " + (i + 1) + ": " + balcoes[i]);
+        }    
+
         ///Questão 6
         {
         GestaoDeFuncionarios gestaoFuncionarios = new GestaoDeFuncionarios();
@@ -103,8 +119,28 @@ public class SystemCinema {
         }
         }
         
+        ///Questao 8
+         System.out.println("Dados das vendas diárias:");
+        caixa1.listarVendasDiarias();
+
+        System.out.println("\nDados dos clientes:");
+        gestaoDeClientes.listarClientes();
+        
+        ///Questão 9
+        {
+        Produtos, Filmes e Clientes estão salvos de forma dinâmica.
+        
+        Produto produto = new Produto();
+        Filme filme = new Filme();
+        Cliente cliente = new Cliente();
+        
+        }
+        
         ///Questao 10
         {
+        caixa1.extratoVenda();
+        Repositorys.salvarClientesComVendas(gestaoDeClientes.getListaDeClientes(), caixa1.getVendasPorCliente()); 
+        
         GestaoDeClientes gestaoDeClientes = new GestaoDeClientes();
         Caixa caixa = new Caixa(new Carrinho(new Estoque()));
 
@@ -219,12 +255,31 @@ public class SystemCinema {
         
         ///Questao 12
         {
+        Produto.getN_INSTANCIAS();
+        
         Cliente cliente1 = new Cliente("Lucas", "Martins", "Diamantina", "123456789", "11122233344", LocalDate.of(2001, 11, 07), "Ação", "Drama", "lucas", "123");
         Cliente cliente2 = new Cliente("Enzo", "Veloso", "Diamantina", "987654321", "55566677788", LocalDate.of(2001, 12, 5), "Comédia", "Romance", "enzo", "123");
         
         Sistema sistema = new Sistema();
         System.out.println("Contador de Clientes: " + sistema.getContadorClientePrivado());
         }
+         
+        //Questao 13
+        ComparacoesFilme.comparaNomes();
+        ComparacoesFilme.compareTotalDuracao();
+        ComparacoesFilme.compareTotalEspectadores();
+        
+        ComparacoesVenda.compararPorValorTotal();
+        ComparacoesVenda.compararPorValorIngressos();
+        ComparacoesVenda.compararPorValorProdutos();
+        
+        GestaoDeFilmes gestaoDeFilmesas = new GestaoDeFilmes();
+
+        gestaoDeFilmes.cadastraFilme("Titanic", "Acao", Duration.ofMinutes(120));
+        gestaoDeFilmes.cadastraFilme("Procurando Nemo", "Animacao", Duration.ofMinutes(90));
+        gestaoDeFilmes.cadastraFilme("Avatar", "Ficcao Cientifica", Duration.ofMinutes(150));
+        gestaoDeFilmes.cadastraFilme("Matrix", "Ficcao Cientifica", Duration.ofMinutes(136));
+        gestaoDeFilmes.cadastraFilme("Interestelar", "Ficcao Cientifica", Duration.ofMinutes(169)); 
          
         ///Questao 14
         {
@@ -274,10 +329,85 @@ public class SystemCinema {
          
         }
         
-        */
+        ///Questao 16
+        // Acessa os filmes pela posição na lista
+        List<Filme> filmess = gestaoDeFilmes.getFilmes();
+        //Ordenacao de Filmes
+        
+        // Ordena a lista de Filmes pelo nome
+        Collections.sort(filmess, ComparacoesFilme.comparaNomes());
+        
+        for (Filme filme : filmess)
+        {
+            System.out.println(filme);
+        }
+       
+        // Ordena a lista de Filmes pelo total de expectadores
+        Collections.sort(filmes, ComparacoesFilme.compareTotalEspectadores());
+        
+        // Ordena a lista de Filmes pela duracao
+        Collections.sort(filmes, ComparacoesFilme.compareTotalDuracao());
+        
+        List<Venda> vendas = new ArrayList<>();
+        vendas.add(new Venda(LocalDate.now(), 200.0, 150.0, 50.0));
+        vendas.add(new Venda(LocalDate.now(), 300.0, 200.0, 100.0));
+        vendas.add(new Venda(LocalDate.now(), 100.0, 50.0, 50.0));
+        // Ordena as vendas pelo valor total
+        Collections.sort(vendas, ComparacoesVenda.compararPorValorTotal());
+        System.out.println("Vendas ordenadas por valor total:");
+        for (Venda venda : vendas) {
+            System.out.println(venda);
+        }
+
+        // Ordena as vendas pelo valor total dos ingressos
+        Collections.sort(vendas, ComparacoesVenda.compararPorValorIngressos());
+        System.out.println("Vendas ordenadas por valor total dos ingressos:");
+        for (Venda venda : vendas) {
+            System.out.println(venda);
+        }
+
+        // Ordena as vendas pelo valor total dos produtos
+        Collections.sort(vendas, ComparacoesVenda.compararPorValorProdutos());
+        System.out.println("Vendas ordenadas por valor total dos produtos:");
+        for (Venda venda : vendas) {
+            System.out.println(venda);
+        }
+        
+        //Questão 17
+        GestaoDeClientes gestaoDeClientes = new GestaoDeClientes();
+        Cliente cliente01 = (new Cliente("Lucas", "Martins", "Rua valmira pires", "11223344", "33333333333", LocalDate.of(2001, 3, 3), "Vingadores", "acao", "lucas_login", "lucas_senha"));
+        Cliente cliente02 = (new Cliente("Enzo", "Veloso", "Rua valmira pires", "44332211", "44332211", LocalDate.of(2002, 4, 4), "interestellar", "ficcao", "enzo_login", "enzo_senha"));
+
+        //Ordena a lista de clientes por ordem alfabetica
+        Collections.sort(gestaoDeClientes.getListaDeClientes(), (c1, c2) -> gestaoDeClientes.compareClientesPorNome(c1, c2));
+        // Teste do método find
+        System.out.println("Informe qual nome deseja buscar");
+        Scanner sc = new Scanner(System.in);
+        String busca = sc.nextLine();
+        Cliente fazerBusca = gestaoDeClientes.find(busca);
+        if (fazerBusca != null)
+        {
+            System.out.println("Cliente encontrado: " + fazerBusca);
+        }
+        else
+        {
+            System.out.println("Cliente não encontrado");
+        }
+
+        // Teste do método binarySearch da classe Collections 
+        int index = Collections.binarySearch(gestaoDeClientes.getListaDeClientes(), cliente01, (c1, c2) -> gestaoDeClientes.compareClientesPorNome(c1, c2));
+        if (index >= 0)
+        {
+            System.out.println("Cliente encontrado: " + gestaoDeClientes.getListaDeClientes().get(index));
+        }
+        else
+        {
+            System.out.println("Cliente não.");
+        }      
+    */ 
     }    
 }
-    
+             
 
 
 

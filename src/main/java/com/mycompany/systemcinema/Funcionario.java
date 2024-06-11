@@ -68,6 +68,7 @@ public class Funcionario extends Pessoa {
         super(name, sobrenome, endereco, telefone, cpf, aniversario);
     }
     
+    
     /**
      * Método para realizar o login do funcionário no sistema.
      * Solicita o login e a senha do funcionário para acessar o sistema.

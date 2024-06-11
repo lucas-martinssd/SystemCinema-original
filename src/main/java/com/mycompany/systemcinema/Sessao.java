@@ -71,7 +71,9 @@ class Sessao
         this.horarioTermino = calcularHorarioTermino();
         this.espectadores = 0;
     }
-
+    
+    public Sessao(){}
+    
     private LocalDateTime calcularHorarioTermino()
     {
         return horarioInicio.plus(filme.getDuracao());

@@ -5,6 +5,9 @@
 package com.mycompany.systemcinema;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -235,6 +238,105 @@ public class Sistema
                 System.out.println("Login ou senha incorretos.");
                 informarClienteOuFuncionarioOuProprietario(cliente, sessao, gestaoDeFilmes, carrinho, estoque,
                         funcionario, gestaoDeClientes, proprietario);
+            }
+        }
+    }
+    
+    public void vendaPadrao(Cliente cliente, Funcionario funcionario, Proprietario proprietario, Sessao sessao, 
+                            GestaoDeFilmes gestaoDeFilmes, Caixa caixa) {
+        Scanner sc = new Scanner(System.in);
+        
+        Estoque estoque = new Estoque();
+        Carrinho carrinho = new Carrinho(estoque);
+
+        Caixa.inicializarBalcoes(estoque);
+        Caixa[] balcoes = Caixa.getBalcoes();
+        
+        System.out.println("Você é Cliente, Funcionario ou Proprietario? ");
+        String funcao = sc.nextLine();
+        
+        gestaoDeFilmes.cadastraFilme("Titanic", "Acao", Duration.ofMinutes(120));
+        gestaoDeFilmes.cadastraFilme("Procurando Nemo", "Animacao", Duration.ofMinutes(90));
+        gestaoDeFilmes.cadastraFilme("Avatar", "Ficcao Cientifica", Duration.ofMinutes(150));
+        gestaoDeFilmes.cadastraFilme("Matrix", "Ficcao Cientifica", Duration.ofMinutes(136));
+        gestaoDeFilmes.cadastraFilme("Interestelar", "Ficcao Cientifica", Duration.ofMinutes(169));
+        
+        List<Filme> filmes = gestaoDeFilmes.getFilmes();
+        
+        Sala sala1 = new Sala(1, filmes.get(0));
+        Sala sala2 = new Sala(2, filmes.get(1));
+        Sala sala3 = new Sala(3, filmes.get(2));
+        Sala sala4 = new Sala(4, filmes.get(3));
+        Sala sala5 = new Sala(5, filmes.get(4));
+
+        for (Sala sala : Sala.listarSalas()) {
+            System.out.println(sala);
+        }
+
+        Sessao.criarSessao(filmes.get(0), sala1, LocalDateTime.of(2024, 5, 20, 14, 0));
+        Sessao.criarSessao(filmes.get(0), sala1, LocalDateTime.of(2024, 5, 20, 17, 0));
+        Sessao.criarSessao(filmes.get(0), sala1, LocalDateTime.of(2024, 5, 20, 21, 0));
+        Sessao.criarSessao(filmes.get(1), sala2, LocalDateTime.of(2024, 5, 20, 13, 0));
+        Sessao.criarSessao(filmes.get(1), sala2, LocalDateTime.of(2024, 5, 20, 16, 0));
+        Sessao.criarSessao(filmes.get(2), sala3, LocalDateTime.of(2024, 5, 20, 16, 0));
+        Sessao.criarSessao(filmes.get(3), sala4, LocalDateTime.of(2024, 5, 20, 17, 0));
+        Sessao.criarSessao(filmes.get(4), sala5, LocalDateTime.of(2024, 5, 20, 18, 0));
+
+        List<Sessao> sessoes = Sessao.listarSessoes();
+        if (sessoes != null) {
+            for (Sessao s : sessoes) {
+                System.out.println(s);
+            }
+        } else {
+            System.out.println("Nenhuma sessão disponível.");
+        }
+        
+        estoque.cadastrarProduto("Pipoca", LocalDate.of(2024, 12, 31),10);
+        estoque.cadastrarProduto("Guloseima", LocalDate.of(2024, 10, 31),6);
+        estoque.cadastrarProduto("Bebida", LocalDate.of(2024, 11, 30), 8);
+        
+        String loginClienteOriginal = cliente.getLoginClienteOriginal();
+        String senhaClienteOriginal = cliente.getSenhaClienteOriginal();
+        String loginFuncionarioOriginal = funcionario.getLoginFuncionarioOriginal();
+        String senhaFuncionarioOriginal = funcionario.getSenhaFuncionarioOriginal();
+        String loginProprietarioOriginal = proprietario.getLoginProprietarioOriginal();
+        String senhaProprietarioOriginal = proprietario.getSenhaProprietarioOriginal();
+
+        if (funcao.equals("Cliente")) {
+            System.out.println("Informe o seu login: ");
+            String loginCliente = sc.nextLine();
+            System.out.println("Informe a sua senha: ");
+            String senhaCliente = sc.nextLine();
+        
+            if (loginCliente.equals(loginClienteOriginal) && senhaCliente.equals(senhaClienteOriginal)) {
+                System.out.println("Bem vindo ao CineDjamas!");
+ 
+                carrinho.selecionarSessao(sessoes);
+                System.out.println("Sessão selecionada no carrinho: " + carrinho.getSessao());  // Depuração
+                carrinho.selecionarPoltronas();
+                carrinho.selecionarProdutoEQuant();
+                Sessao sessaoSelecionada = carrinho.getSessao();
+                System.out.println("Sessão final no carrinho: " + sessaoSelecionada);  // Depuração
+
+                System.out.println(carrinho.toString());
+                caixa.informarValorIngresso(10);
+                System.out.println("Valor total ingressos: " + caixa.valorTotalIngressos());
+                System.out.println("Valor total produtos: " + caixa.valorTotalProdutos());
+                System.out.println("Valor total compra: " + caixa.valorTotalCompra());
+
+                System.out.println("Efetuar pagamento ou Cancelar compra?");
+                String pagamento = sc.nextLine();
+                if (pagamento.equalsIgnoreCase("Efetuar pagamento")) {
+                    caixa.efetuarPagamento(cliente);
+                } else if (pagamento.equalsIgnoreCase("Cancelar compra")) {
+                    caixa.cancelarPagamento();
+                } else {
+                    System.out.println("Opção invalida.");
+                }
+                caixa.extratoVenda();
+            } else {
+                System.out.println("Login ou senha incorretos.");
+                vendaPadrao(cliente, funcionario, proprietario, sessao, gestaoDeFilmes, caixa);
             }
         }
     }

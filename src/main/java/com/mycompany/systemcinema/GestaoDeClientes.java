@@ -184,4 +184,41 @@ public class GestaoDeClientes implements Iterable<Cliente> {
     public Iterator<Cliente> iterator() {
         return new ClienteIterator(listaDeClientes);
     }
+    
+    public Cliente find(String nome)
+    {
+        Iterator<Cliente> iterator = listaDeClientes.iterator();
+        while (iterator.hasNext())
+        {
+            Cliente cliente = iterator.next();
+            if (cliente.getName().equalsIgnoreCase(nome))
+            {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public int compareClientesPorNome(Cliente c1, Cliente c2)
+    {
+        String nome1 = c1.getName();
+        String nome2 = c2.getName();
+
+        for (int i = 0; i < Math.min(nome1.length(), nome2.length()); i++)
+        {
+            char charNome1 = nome1.charAt(i);
+            char charNome2 = nome2.charAt(i);
+
+            if (charNome1 < charNome2)
+            {
+                return -1;
+            }
+            else if (charNome1 > charNome2)
+            {
+                return 1;
+            }
+        }
+
+        return Integer.compare(nome1.length(), nome2.length());
+    }
 }
